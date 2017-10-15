@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+    </head>
+    <body>
+        <canvas id="canvas" width="500" height="500" style=""></canvas>
+        <script>
+            var canvas = document.getElementById("canvas");
+            var context = canvas.getContext("2d");
+            function drawClock(){
+                context.clearRect(0,0,500,500);
+                var now = new Date();
+                var sec = now.getSeconds();
+                var min = now.getMinutes();
+                var hours = now.getHours();
+                //小时必须获取浮点类型 (小时+分钟/60)
+                hours = hours+min/60;
+                var hours = hours>12?hours-12:hours;
+
+                context.lineWidth = 1;
+                context.strokeStyle = "blue";
+                context.beginPath();
+                context.arc(250,250,200,0,360,false);
+                context.closePath();
+                context.stroke();
+
+                for(var i=0;i<60;i++){
+                    context.save();
+                    context.beginPath();
+                    context.lineWidth = 3;
+                    context.strokeStyle = "#00aac5";
+                    context.translate(250,250);
+                    context.rotate(i*6*Math.PI/180);
+                    context.moveTo(0,-180);
+                    context.lineTo(0,-190);
+                    context.closePath();
+                    context.stroke();
+                    context.restore();
+                }
+
+								for(var i=0;i<12;i++){
+                	//保存当前环境的状态
+                  context.save();
+                  context.lineWidth = 7;
+                  context.strokeStyle = "#000";
+                  // 转移原点
+                  context.translate(250,250);
+                  // 旋转
+                  context.rotate(i*30*Math.PI/180);
+                  context.beginPath();
+                  context.moveTo(0,-160);
+                  context.lineTo(0,-190);
+                  context.closePath();
+                  context.stroke();
+                  // 返回之前保存过的路径状态和属性
+                  context.restore();
+                }
+                // 绘制时针
+                context.save();
+                context.lineWidth = 5;
+                context.strokeStyle = "#000";
+                context.beginPath();
+                context.translate(250,250);
+                context.rotate(hours*30*Math.PI/180);
+                context.moveTo(0,-130);
+                context.lineTo(0,10);
+                context.closePath();
+                context.stroke();
+                context.restore();
+                // 绘制分针
+                context.save();
+                context.lineWidth = 3;
+                context.strokeStyle = "#000";
+                context.beginPath();
+                context.translate(250,250);
+                context.rotate(min*6*Math.PI/180);
+                context.moveTo(0,-140);
+                context.lineTo(0,10);
+                context.closePath();
+                context.stroke();
+                context.restore();
+                // 绘制秒针
+                context.save();
+                context.lineWidth = 1;
+                context.strokeStyle = "#ff0000";
+                context.beginPath();
+                context.translate(250,250);
+                context.rotate(sec*6*Math.PI/180);
+                context.moveTo(0,-160);
+                context.lineTo(0,15);
+                context.closePath();
+                context.stroke();
+                context.restore();
+            }
+            // 1s 画一次并清除上一次图案
+            setInterval(drawClock,1000);
+        </script>
+    </body>
+</html>
