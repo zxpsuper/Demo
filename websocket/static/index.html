@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    input {
+      background-color: #fff;
+      background-image: none;
+      border-radius: 4px;
+      border: 1px solid #bfcbd9;
+      box-sizing: border-box;
+      color: #1f2d3d;
+      font-size: inherit;
+      height: 40px;
+      line-height: 1;
+      outline: 0;
+      padding: 3px 10px;
+    }
+    .el-button--primary {
+      color: #fff;
+      background-color: #20a0ff;
+      border-color: #20a0ff;
+    }
+    .el-button {
+      display: inline-block;
+      line-height: 1;
+      white-space: nowrap;
+      cursor: pointer;
+      background: #00aac5;
+      border: 1px solid #c4c4c4;
+      color: #fff;
+      margin: 0;
+      padding: 10px 15px;
+      border-radius: 4px;
+      outline: 0;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <div id="content">
+    </div>
+  </div>
+  <div>
+    <input type="text" id="input">
+    <button class="el-button el-button--primary el-button--large" type="button" onclick="say()"><span>发送消息</span></button>
+  </div>
+  <script src="./socket.io.js"></script>
+  <script>
+    var socket = io.connect('http://localhost:80');
+    socket.on('message', function (data) {
+      let html = document.createElement('p')
+      html.innerHTML = `系统消息：<span>${data.hello}</span>`
+      document.getElementById('content').appendChild(html)
+      console.log(data);
+    });
+    function say() {
+      let t = document.getElementById('input').value
+      if (!t) return
+      let html = document.createElement('p')
+      html.innerHTML = `你细声说：<span>${t}</span>`
+      document.getElementById('content').appendChild(html)
+      socket.emit('say', { my: t});
+    }
+    socket.on('news', function (data) {
+      console.log(data);
+      let html = document.createElement('p')
+      html.innerHTML = `小皮咖说：<span>我知道了，你说“${data.hello}”</span>`
+      document.getElementById('content').appendChild(html)
+    });
+    socket.on('eating', function (data) {
+      console.log(data);
+      let html = document.createElement('p')
+      html.innerHTML = `小皮咖说：${data.hello}`
+      document.getElementById('content').appendChild(html)
+    });
+  </script>
+</body>
+</html>
