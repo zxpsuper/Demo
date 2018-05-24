@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width initial-scale=1">
+
+<link rel="apple-touch-icon" sizes="57x57" href="icons/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="icons/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="icons/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="icons/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="icons/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="icons/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="icons/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="icons/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="icons/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="icons/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#E6E6FA">
+<meta name="msapplication-TileImage" content="icons/ms-icon-144x144.png">
+<meta name="theme-color" content="#E6E6FA">
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js').then(function(registration) {
+      // Registration was successful
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }, function(err) {
+      // registration failed :(
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
+}
+</script>
+
+  <title>Web Community Leads</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+  <link rel="stylesheet" href="style/style.css">
+  <script src="https://use.fontawesome.com/4ca20d00e4.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="box">
+      <h1>Web Community Leads UK and IE</h1>
+      <br>
+      <p>Web Community Leads UK and IE is a network of people who run meet up groups or similar events focused around web technologies.
+      <br>It exists to help event organisers to share resources and ask for advice when needed.</p>
+
+      <h3>How to get involved</h3>
+      <ol>
+        <li>Read though our <a href="https://github.com/webcommunityukie/Code-of-Conduct"><i class="fa fa-bolt"></i> Code of Conduct</a>.</li>
+        <li>Visit our <a href="https://webcommunityukie.slack.com"><i class="fa fa-slack"></i> Slack</a>, if you can track down someone already involved ask them to invite you and if you can't you are still welcome to join, details of how to can be found <a href="https://docs.google.com/document/d/1-9mtynxQfA445qTM_VRSfMJbkMKsoBKLiIFpTCPK_F4/edit?usp=sharing">here.</a></li>
+        <li>Check out all the <a href="https://drive.google.com/drive/u/1/folders/0B1OSazPpPBanODA3RGIxc0xiQ0k"><i class="fa fa-file-o"></i> Information and Resources</a> our community has compiled on running events.</li>
+      </ol>
+      <footer>
+        <a href="https://github.com/webcommunityukie/webcommunityukie.github.io">Code on GitHub</a>
+        <a href="http://goldsmiths.tech">Inspired by Hacksmiths</a>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>
