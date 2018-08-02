@@ -59,9 +59,8 @@ export default {
       dateValue: "", // 输入框显示日期
       date: new Date().getDate(), // 当前日期
       panelState: false, // 初始值，默认panel关闭
+      month: new Date().getMonth(),
       tmpMonth: new Date().getMonth(), // 临时月份，可修改
-      month: new Date().getMonth(), // 当前月份
-      year: new Date().getFullYear(), // 当前年份
       tmpYear: new Date().getFullYear(), // 临时年份，可修改
       weekList: [
         { label: "Sun", value: 0 },
@@ -104,7 +103,7 @@ export default {
     dateList() {
       //获取当月的天数
       let currentMonthLength = new Date(
-        this.tmpMonth,
+        this.tmpYear,
         this.tmpMonth + 1,
         0
       ).getDate();
@@ -119,10 +118,10 @@ export default {
         }
       );
       // 获取当月1号的星期是为了确定在1号前需要插多少天
-      let startDay = new Date(this.year, this.tmpMonth, 1).getDay();
+      let startDay = new Date(this.tmpYear, this.tmpMonth, 1).getDay();
       // 确认上个月一共多少天
       let previousMongthLength = new Date(
-        this.year,
+        this.tmpYear,
         this.tmpMonth,
         0
       ).getDate();
@@ -142,7 +141,7 @@ export default {
       return this.monthList[this.tmpMonth].label;
     },
     yearList() {
-      return Array.from({ length: 12 }, (value, index) => this.year + index);
+      return Array.from({ length: 12 }, (value, index) => this.tmpYear + index);
     }
   },
   mounted() {
@@ -193,6 +192,7 @@ export default {
       if (item.previousMonth) this.tmpMonth--;
       if (item.nextMonth) this.tmpMonth++;
       let selectDay = new Date(this.tmpYear, this.tmpMonth, this.nowValue);
+      console.log(selectDay.getTime())
       this.dateValue = this.formatDate(selectDay.getTime());
       this.panelState = !this.panelState;
       this.$emit("input", selectDay);
@@ -207,9 +207,6 @@ export default {
     },
     formatDate(date, fmt = this.format) {
       // 长度为10的时候末尾补3个0
-      if (String(date).length !== 13) {
-        date += "000";
-      }
       if (date === null || date === "null") {
         return "--";
       }
