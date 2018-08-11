@@ -5,7 +5,7 @@
 1. **VUE 时间选择器**
 - [相关文章——vue 手写一个时间选择器](https://juejin.im/post/5b62b0cfe51d453489494efb)
   
-- [源码](./datepicker/datepicker.vue)+[Demo](https://zxpsuper.github.io/Demo/datepicker/index.html)
+- [源码](./datepicker/Datepicker.vue)+[Demo](https://zxpsuper.github.io/Demo/datepicker/index.html)
 
 2. **CANVAS 刮奖小 Demo**
 - [相关文章——canvas 实现刮刮乐](https://blog.csdn.net/weixin_38788347/article/details/78239704)
