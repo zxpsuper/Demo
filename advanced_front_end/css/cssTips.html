@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>前端进阶小书 | CSS 几个小技巧</title>
+    <meta name="description" content="小皮咖前端经验整理而写成的一本书">
+    
+    
+    <link rel="preload" href="/Demo/advanced_front_end/assets/css/6.styles.ca38161e.css" as="style"><link rel="preload" href="/Demo/advanced_front_end/assets/js/app.1cdebf32.js" as="script"><link rel="preload" href="/Demo/advanced_front_end/assets/js/2.b79059fd.js" as="script"><link rel="prefetch" href="/Demo/advanced_front_end/assets/js/0.e80c9f2b.js"><link rel="prefetch" href="/Demo/advanced_front_end/assets/js/1.4dc6f46e.js"><link rel="prefetch" href="/Demo/advanced_front_end/assets/js/3.8dd5a700.js"><link rel="prefetch" href="/Demo/advanced_front_end/assets/js/4.e8a115db.js"><link rel="prefetch" href="/Demo/advanced_front_end/assets/js/5.6a514ca1.js">
+    <link rel="stylesheet" href="/Demo/advanced_front_end/assets/css/6.styles.ca38161e.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div><a href="/Demo/advanced_front_end/" class="home-link router-link-active"><!----><span class="site-name">
+      前端进阶小书
+    </span></a><div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""><!----></div><nav class="nav-links can-hide"><div class="nav-item"><a href="/Demo/advanced_front_end/" class="nav-link">Home</a></div><div class="nav-item"><a href="https://github.com/zxpsuper/advanced_front_end" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><!----></nav></div></header><div class="sidebar-mask"></div><div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/Demo/advanced_front_end/" class="nav-link">Home</a></div><div class="nav-item"><a href="https://github.com/zxpsuper/advanced_front_end" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><!----></nav><ul class="sidebar-links"><li><div class="sidebar-group first"><p class="sidebar-heading open"><span>CSS 大全</span><!----></p><ul class="sidebar-group-items"><li><a href="/Demo/advanced_front_end/css/cssTips.html" class="active sidebar-link">CSS 几个小技巧</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/Demo/advanced_front_end/css/flex.html" class="sidebar-link">Flex布局介绍</a></li><li><a href="/Demo/advanced_front_end/css/css3.html" class="sidebar-link">CSS3 兼容性处理</a></li></ul></div></li></ul></div><div class="page"><div class="content"><h3 id="css-几个小技巧"><a href="#css-几个小技巧" aria-hidden="true" class="header-anchor">#</a> CSS 几个小技巧</h3><ol><li>设置placeholder样式的方法</li></ol><div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">:-moz-placeholder</span> <span class="token punctuation">{</span> <span class="token comment">/* Mozilla Firefox 4 to 18 */</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> #b1b1b1<span class="token punctuation">;</span> <span class="token property">opacity</span><span class="token punctuation">:</span>1<span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>
+
+<span class="token selector">::-moz-placeholder</span> <span class="token punctuation">{</span> <span class="token comment">/* Mozilla Firefox 19+ */</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> #b1b1b1<span class="token punctuation">;</span><span class="token property">opacity</span><span class="token punctuation">:</span>1<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">input:-ms-input-placeholder</span><span class="token punctuation">{</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> #b1b1b1<span class="token punctuation">;</span><span class="token property">opacity</span><span class="token punctuation">:</span>1<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">input::-webkit-input-placeholder</span><span class="token punctuation">{</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> #b1b1b1<span class="token punctuation">;</span><span class="token property">opacity</span><span class="token punctuation">:</span>1<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="2"><li>去掉 input 默认样式</li></ol><div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">input</span> <span class="token punctuation">{</span>
+    <span class="token property">outline</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+    <span class="token property">border</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+    <span class="token property">background-image</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+    <span class="token property">cursor</span><span class="token punctuation">:</span> text<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="3"><li>设置placeholder样式的方法</li></ol><div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">:-moz-placeholder</span> <span class="token punctuation">{</span> <span class="token comment">/* Mozilla Firefox 4 to 18 */</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> #b1b1b1<span class="token punctuation">;</span> <span class="token property">opacity</span><span class="token punctuation">:</span>1<span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>
+
+<span class="token selector">::-moz-placeholder</span> <span class="token punctuation">{</span> <span class="token comment">/* Mozilla Firefox 19+ */</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> #b1b1b1<span class="token punctuation">;</span><span class="token property">opacity</span><span class="token punctuation">:</span>1<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">input:-ms-input-placeholder</span><span class="token punctuation">{</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> #b1b1b1<span class="token punctuation">;</span><span class="token property">opacity</span><span class="token punctuation">:</span>1<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">input::-webkit-input-placeholder</span><span class="token punctuation">{</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> #b1b1b1<span class="token punctuation">;</span><span class="token property">opacity</span><span class="token punctuation">:</span>1<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="4"><li>修改 select 默认样式</li></ol><div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">select</span> <span class="token punctuation">{</span>
+    <span class="token property">appearance</span><span class="token punctuation">:</span>none<span class="token punctuation">;</span>
+    <span class="token property">-moz-appearance</span><span class="token punctuation">:</span>none<span class="token punctuation">;</span>
+    <span class="token property">-webkit-appearance</span><span class="token punctuation">:</span>none<span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> <span class="token url">url('./Group.png')</span> no-repeat right<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="5"><li>让文字不被选中</li></ol><div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">.text</span> <span class="token punctuation">{</span>
+    <span class="token property">-moz-user-select</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+    <span class="token property">-webkit-user-select</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+    <span class="token property">user-select</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="6"><li>如何让图片不被选中</li></ol><div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">img</span> <span class="token punctuation">{</span>
+  <span class="token property">-moz-user-select</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>   
+  <span class="token property">-webkit-user-select</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+  <span class="token property">-ms-user-select</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>   
+  <span class="token property">-khtml-user-select</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>   
+  <span class="token property">user-select</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>  
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="7"><li>单词换行</li></ol><div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">.word</span> <span class="token punctuation">{</span>
+    <span class="token property">word-wrap</span><span class="token punctuation">:</span> break-word<span class="token punctuation">;</span>
+    <span class="token property">word-break</span><span class="token punctuation">:</span> break-all<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="8"><li>css画叉</li></ol><div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">.a</span><span class="token punctuation">{</span> 
+  <span class="token property">display</span><span class="token punctuation">:</span> inline-block<span class="token punctuation">;</span> 
+  <span class="token property">width</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span>5px<span class="token punctuation">;</span> 
+  <span class="token property">background</span><span class="token punctuation">:</span> #ccc<span class="token punctuation">;</span>
+  <span class="token property">line-height</span><span class="token punctuation">:</span>0<span class="token punctuation">;</span>
+  <span class="token property">font-size</span><span class="token punctuation">:</span>0<span class="token punctuation">;</span>
+  <span class="token property">vertical-align</span><span class="token punctuation">:</span>middle<span class="token punctuation">;</span>
+  <span class="token property">-webkit-transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span>45deg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">position</span><span class="token punctuation">:</span> absolute<span class="token punctuation">;</span>
+  <span class="token property">top</span><span class="token punctuation">:</span> 16px<span class="token punctuation">;</span>
+  <span class="token property">right</span><span class="token punctuation">:</span> 13px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector">.a:after</span><span class="token punctuation">{</span>
+  <span class="token property">content</span><span class="token punctuation">:</span><span class="token string">'/'</span><span class="token punctuation">;</span>
+  <span class="token property">display</span><span class="token punctuation">:</span>block<span class="token punctuation">;</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span>5px<span class="token punctuation">;</span> 
+  <span class="token property">background</span><span class="token punctuation">:</span> #ccc<span class="token punctuation">;</span>
+  <span class="token property">-webkit-transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span>-90deg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="9"><li>文字过多三点显示隐藏</li></ol><div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">// 单行三点隐藏
+.one-line</span> <span class="token punctuation">{</span>
+    <span class="token property">white-space</span><span class="token punctuation">:</span> nowrap<span class="token punctuation">;</span>
+    <span class="token property">text-overflow</span><span class="token punctuation">:</span>ellipsis<span class="token punctuation">;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 150px<span class="token punctuation">;</span>
+    <span class="token property">overflow</span><span class="token punctuation">:</span> hidden<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector">// 多行三点隐藏
+.more-line</span> <span class="token punctuation">{</span>
+    <span class="token property">overflow</span><span class="token punctuation">:</span>hidden<span class="token punctuation">;</span> 
+    <span class="token property">text-overflow</span><span class="token punctuation">:</span>ellipsis<span class="token punctuation">;</span>
+    <span class="token property">display</span><span class="token punctuation">:</span>-webkit-box<span class="token punctuation">;</span> 
+    <span class="token property">-webkit-box-orient</span><span class="token punctuation">:</span>vertical<span class="token punctuation">;</span>
+    <span class="token property">-webkit-line-clamp</span><span class="token punctuation">:</span>2<span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>
+</code></pre></div></div><div class="content edit-link"><!----><!----></div><div class="content page-nav"><p class="inner"><!----><span class="next"><a href="/Demo/advanced_front_end/css/flex.html">
+          Flex布局介绍
+        </a> →
+      </span></p></div></div></div></div>
+    <script src="/Demo/advanced_front_end/assets/js/2.b79059fd.js" defer></script><script src="/Demo/advanced_front_end/assets/js/app.1cdebf32.js" defer></script>
+  </body>
+</html>

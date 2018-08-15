@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>前端进阶小书</title>
+    <meta name="description" content="小皮咖前端经验整理而写成的一本书">
+    
+    
+    <link rel="preload" href="/Demo/advanced_front_end/assets/css/6.styles.ca38161e.css" as="style"><link rel="preload" href="/Demo/advanced_front_end/assets/js/app.1cdebf32.js" as="script"><link rel="preload" href="/Demo/advanced_front_end/assets/js/4.e8a115db.js" as="script"><link rel="prefetch" href="/Demo/advanced_front_end/assets/js/0.e80c9f2b.js"><link rel="prefetch" href="/Demo/advanced_front_end/assets/js/1.4dc6f46e.js"><link rel="prefetch" href="/Demo/advanced_front_end/assets/js/2.b79059fd.js"><link rel="prefetch" href="/Demo/advanced_front_end/assets/js/3.8dd5a700.js"><link rel="prefetch" href="/Demo/advanced_front_end/assets/js/5.6a514ca1.js">
+    <link rel="stylesheet" href="/Demo/advanced_front_end/assets/css/6.styles.ca38161e.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div><a href="/Demo/advanced_front_end/" class="home-link router-link-active"><!----><span class="site-name">
+      前端进阶小书
+    </span></a><div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""><!----></div><nav class="nav-links can-hide"><div class="nav-item"><a href="/Demo/advanced_front_end/" class="nav-link">Home</a></div><div class="nav-item"><a href="https://github.com/zxpsuper/advanced_front_end" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><!----></nav></div></header><div class="sidebar-mask"></div><div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/Demo/advanced_front_end/" class="nav-link">Home</a></div><div class="nav-item"><a href="https://github.com/zxpsuper/advanced_front_end" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div><!----></nav><ul class="sidebar-links"><li><div class="sidebar-group first"><p class="sidebar-heading open"><span>CSS 大全</span><!----></p><ul class="sidebar-group-items"><li><a href="/Demo/advanced_front_end/css/cssTips.html" class="sidebar-link">CSS 几个小技巧</a></li><li><a href="/Demo/advanced_front_end/css/flex.html" class="sidebar-link">Flex布局介绍</a></li><li><a href="/Demo/advanced_front_end/css/css3.html" class="sidebar-link">CSS3 兼容性处理</a></li></ul></div></li></ul></div><div class="page"><div class="content"><ol><li><p>使用flex布局，元素的宽度定不了，需使用flex-shrink：0 使其宽度不缩小</p></li><li><p>箭头的画法——两个三角形合成，一个覆盖另一个。</p></li><li><p>父子元素设置margin-top以值大为准，且子元素无margin-top</p></li><li><p>设置placeholder样式的方法</p></li></ol><div class="language- line-numbers-mode"><pre class="language-text"><code>:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #b1b1b1; opacity:1; 
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #b1b1b1;opacity:1;
+}
+
+input:-ms-input-placeholder{
+    color: #b1b1b1;opacity:1;
+}
+
+input::-webkit-input-placeholder{
+    color: #b1b1b1;opacity:1;
+}
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><ol start="5"><li><p>float:left 会影响 margin: 0 auto;自适应</p></li><li><p>div 设置 text-align:center 只对 div 中的行内元素起作用</p></li><li><p>修改 select 默认样式</p></li></ol><div class="language- line-numbers-mode"><pre class="language-text"><code>appearance:none;
+-moz-appearance:none;
+-webkit-appearance:none;
+background: url('./Group.png') no-repeat right;
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><ol start="8"><li>让文字不被选中</li></ol><div class="language- line-numbers-mode"><pre class="language-text"><code>    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><ol start="9"><li><p>botton 标签没有加type属性会出现路由加问号的情况出现（谷歌浏览器）。</p></li><li><p>vertical-align 只针对使用的元素，不会使子元素垂直居中</p></li><li><p>如何让图片不被选中</p></li></ol><div class="language- line-numbers-mode"><pre class="language-text"><code>  -moz-user-select: none;   
+  -webkit-user-select: none;
+  -ms-user-select: none;   
+  -khtml-user-select: none;   
+  user-select: none;  
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><ol start="12"><li><p>不允许的CSS cursor: not-allowed</p></li><li><p>单词换行</p></li></ol><div class="language- line-numbers-mode"><pre class="language-text"><code>word-wrap: break-word;
+word-break: break-all;
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><ol start="14"><li><p>给父元素加上 transform:translate(0,0) ，fixed即可根据父容器定位。</p></li><li><p>css画叉</p></li></ol><div class="language- line-numbers-mode"><pre class="language-text"><code>.a{ 
+  display: inline-block; 
+  width: 20px;
+  height:5px; 
+  background: #ccc;
+  line-height:0;
+  font-size:0;
+  vertical-align:middle;
+  -webkit-transform: rotate(45deg);
+  position: absolute;
+  top: 16px;
+  right: 13px;
+}
+.a:after{
+  content:'/';
+  display:block;
+  width: 20px;
+  height:5px; 
+  background: #ccc;
+  -webkit-transform: rotate(-90deg);
+}
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><ol start="16"><li>3d按钮的实现</li></ol><p>两个类：一个初始样式，一个：active样式。
+主要属性：阴影，：active位置偏移。如top:5px;</p><ol start="17"><li><p>box-sizing:border-box  使用该类的盒子并排显示，宽度高度包含padding</p></li><li><p>绝对定位是相对于元素最近的已定位的祖先元素（即是设置了绝对定位或者相对定位h的祖先元素）</p></li></ol></div><div class="content edit-link"><!----><!----></div><!----></div></div></div>
+    <script src="/Demo/advanced_front_end/assets/js/4.e8a115db.js" defer></script><script src="/Demo/advanced_front_end/assets/js/app.1cdebf32.js" defer></script>
+  </body>
+</html>
