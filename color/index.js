@@ -77,12 +77,12 @@ class Game {
   }
 }
 function getColor(step) {
-  let random = Math.floor(Math.abs(100/step))
-  var color = randomColor(20, 235), m = color.match(/[\da-z]{2}/g);
+  let random = Math.floor(Math.abs(100-4*step))
+  var color = randomColor(0, 255), m = color.match(/[\da-z]{2}/g);
   for (var i = 0; i < m.length; i++) m[i] = parseInt(m[i], 16);//rgb
-  let specialColor = Math.floor(m[0] + (Math.random() < 0.5 ? -1 : 1) * Math.random() * random).toString(16) +
-  Math.floor(m[1] + (Math.random() < 0.5 ? -1 : 1) * Math.random() * random).toString(16) +
-  Math.floor(m[2] + (Math.random() < 0.5 ? -1 : 1) * Math.random() * random).toString(16);
+  let specialColor = Math.floor(m[0] + (Math.random() < 0.5 ? -1 : 1) * random).toString(16) +
+  Math.floor(m[1] + (Math.random() < 0.5 ? -1 : 1) * random).toString(16) +
+  Math.floor(m[2] + (Math.random() < 0.5 ? -1 : 1) * random).toString(16);
   return [color, specialColor]
 }
 
