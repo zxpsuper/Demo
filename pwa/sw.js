@@ -1,3 +1,4 @@
+var cacheName = Math.floor(Math.random() * 100000);
 var CURRENT_CACHES = {
   prefetch: 'prefetch-cache-v' + cacheName
 };
