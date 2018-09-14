@@ -1,7 +1,9 @@
 var cacheName = '10001'
+
 var CURRENT_CACHES = {
   prefetch: 'prefetch-cache-v' + cacheName
 };
+
 let arr = [
   './index.html',
   './sw/assets/css/style1.css',
@@ -13,7 +15,7 @@ let arr = [
   './sw/assets/img/news_banner_img.png',
   './sw/assets/img/WeChat Image_201807121619171.jpg',
 ]
-// Cache our known resources during install
+// install 过程缓存资源。
 self.addEventListener("install", function(event) {
   var now = Date.now();
   var urlsToPrefetch = arr
@@ -47,7 +49,6 @@ self.addEventListener("install", function(event) {
         });
 
         return Promise.all(cachePromises).then(function() {
-          // console.log('Pre-fetching complete.');
           // 立即变为激活状态
           self.skipWaiting();
         });
@@ -87,7 +88,6 @@ self.addEventListener("fetch", function(event) {
     // It's an alternative to first opening a specific named cache and then matching on that.
     caches.match(event.request).then(function(response) {
       if (response) return response;
-
       // event.request will always have the proper mode set ('cors, 'no-cors', etc.) so we don't
       // have to hardcode 'no-cors' like we do when fetch()ing in the install handler.
       return fetch(event.request)

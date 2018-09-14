@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="index.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="wgt-home" id="page-one">
+      <h1>辨色力测试</h1>
+      <p>找出所有色块里颜色不同的一个</p>
+      <a id="start" class="btn btn-primary btn-lg">开始挑战</a>
+    </div>
+    <header class="header">
+      <h1>辨色力测试</h1>
+    </header>
+
+
+    <aside class="wgt-score">
+      
+    </aside>
+
+    <section id="screen" class="screen">
+      <!-- <div class="block" data-index="0" style="width: 50%;">
+        <div class="block-inner" style="background-color: #9edcbd"></div>
+      </div>
+      <div class="block" data-index="1" style="width: 50%;">
+        <div class="block-inner" style="background-color: #76b495"></div>
+      </div>
+      <div class="block" data-index="2" style="width: 50%;">
+        <div class="block-inner" style="background-color: #76b495"></div>
+      </div>
+      <div class="block" data-index="3" style="width: 50%;">
+        <div class="block-inner" style="background-color: #76b495"></div>
+      </div> -->
+    </section>
+    <footer>
+      <div> <a href="http://zxpsuper.github.io" style="color: #FAF8EF"> my blog</a></div>
+      ©<a href="http://zxpsuper.github.io">Suporka</a>
+    </footer>
+
+  </div>
+</body>
+<script src="index.js"></script>
+<script>
+  window.onload = function () {
+    document.querySelector('#start').addEventListener('click', function() {
+      document.querySelector('#page-one').style.display = 'none'
+      new Game({
+        time: 5,
+        end: (score) => {
+          alert('You score is ' + score)
+        }
+      })
+    })
+  }
+</script>
+</html>
