@@ -1,10 +1,10 @@
-var cacheName = Math.floor(Math.random() * 100000);
+var cacheName = '10001'
 var CURRENT_CACHES = {
   prefetch: 'prefetch-cache-v' + cacheName
 };
 let arr = [
   './index.html',
-  './sw/assets/css/style1.csss',
+  './sw/assets/css/style1.css',
   './sw/assets/img/1_img.png',
   './sw/assets/img/2_img.png',
   './sw/assets/img/3_img.png',
