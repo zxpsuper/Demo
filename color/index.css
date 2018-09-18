@@ -87,3 +87,15 @@ h1 {
   -webkit-user-select: none;
   user-select: none;
 }
+.result {
+  background: red;
+  color: #fff;
+  text-align: center;
+  height: 80px;
+  line-height: 80px;
+  font-size: 20px;
+  cursor: pointer;
+}
+footer a {
+  margin-right: 20px;
+}

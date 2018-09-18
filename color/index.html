@@ -28,21 +28,30 @@
     
     <footer>
       <div> <a href="http://zxpsuper.github.io" style="color: #FAF8EF"> my blog</a></div>
-      ©<a href="http://zxpsuper.github.io">Suporka</a>
+      ©<a href="https://zxpsuper.github.io">Suporka</a>
+      ©<a href="https://zxpsuper.github.io/Demo/advanced_front_end/">My book</a>
+      ©<a href="https://github.com/zxpsuper">My Github</a>
     </footer>
-
   </div>
 </body>
-<script src="index.js"></script>
+<!-- <script src="index.js"></script> -->
+<script src="colorGame.js"></script>
 <script>
+  // 事件兼容方法，兼容ie
+  function addEvent(element, type, handler) {
+    if (element.addEventListener) {
+      element.addEventListener(type, handler, false);
+    } else if (element.attachEvent) {
+      element.attachEvent("on" + type, handler);
+    } else {
+      element["on" + type] = handler;
+    }
+  }
   window.onload = function () {
-    document.querySelector('#start').addEventListener('click', function() {
+    addEvent(document.querySelector('#start'), 'click', function() {
       document.querySelector('#page-one').style.display = 'none'
-      new Game({
-        time: 30,
-        end: (score) => {
-          alert('You score is ' + score)
-        }
+      new ColorGame({
+        time: 50
       })
     })
   }
