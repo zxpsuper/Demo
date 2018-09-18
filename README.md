@@ -1,7 +1,8 @@
 # Demo
 
 ### **个人小项目展示及源码小仓库。**
-8. **ES6 手写一个“辨色”小游戏**
+
+9. **ES6 手写一个“辨色”小游戏**
 - [相关文章——ES6 手写一个“辨色”小游戏](https://segmentfault.com/a/1190000016444812)
   
 - [源码](./color/index.js)+[Demo](https://zxpsuper.github.io/Demo/color/index.html)
