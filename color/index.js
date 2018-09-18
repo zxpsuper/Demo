@@ -6,7 +6,7 @@ class ColorGame {
         document.getElementById(
           "screen"
         ).innerHTML = `<div class="result" style="width: 100%;">
-        <div class="block-inner" style="background-color: red" id="restart"> You score is ${score} , click to start again</div>
+        <div class="block-inner" id="restart"> You score is ${score} <br/> click to start again</div>
       </div>`;
         addEvent(document.getElementById("restart"), "click", () => {
           this.init();
