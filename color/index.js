@@ -18,10 +18,12 @@ class ColorGame {
   init(userOption) {
     this.step = 0;
     this.score = 0;
-    if (Object.assign) {
-      Object.assign(this.option, userOption);
-    } else {
-      extend(this.option, userOption, true);
+    if (userOption) {
+      if (Object.assign) {
+        Object.assign(this.option, userOption);
+      } else {
+        extend(this.option, userOption, true);
+      }
     }
     // 倒计时赋值
     this.time = this.option.time;
@@ -90,7 +92,10 @@ function extend(o, n, override) {
       o[p] = n[p];
   }
 }
-// 根据关卡等级返回相应的一般颜色和特殊颜色
+/**
+ * 根据关卡等级返回相应的一般颜色和特殊颜色
+ * @param {number} step 关卡
+ */
 function getColor(step) {
   let random = Math.floor(100/step);
   // let random = Math.floor(Math.abs(100 - 4 * step));
@@ -129,6 +134,7 @@ function randomNum(min, max) {
 }
 
 // 事件兼容方法
+
 function addEvent(element, type, handler) {
   if (element.addEventListener) {
     element.addEventListener(type, handler, false);
