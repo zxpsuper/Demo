@@ -1,0 +1,384 @@
+<html>
+
+<head>
+    <style>
+        .background {
+            background: url('../images/小猪佩奇/ground.png');
+            background-repeat: no-repeat;
+            height: 800px;
+            width: 800px;
+            margin: 0 auto;
+        }
+        .peach {
+            display: inline-block;
+            width: 400px;
+            height: 400px;
+        }
+        .nose {
+            background: #fab1e6;
+            border: 10px solid #e991cb;
+            display: inline-block;
+            position: relative;
+            height: 150px;
+            width: 120px;
+            border-radius: 50% / 50%;
+            transform: rotate(-40deg);
+            left: 100%;
+            z-index: 1000;
+        }
+        .head {
+            height: 270px;
+            width: 300px;
+            background: #fab1e6;
+            border-radius: 50% / 50%;
+            border: 10px solid #e991cb;
+            display: inline-block;
+            position: relative;
+            left: 165px;
+            top: -97px;
+            z-index: 99;
+        }
+        /* 腮红 */
+        .blush {
+            height: 70px;
+            width: 70px;
+            background: #e991cb;
+            display: inline-block;
+            position: relative;
+            left: 32px;
+            top: 144px;
+            border-radius: 50% / 50%;
+        }
+        /* 头部与鼻子之间的图形 */
+        .head-nose {
+            height: 154px;
+            width: 108px;
+            background: #fab1e6;
+            border: 10px solid #e991cb;
+            transform: rotate(-40deg);
+            position: relative;
+            display: inline-block;
+            border-left: none;
+            left: 381px;
+            top: -532px;
+            border-radius: 21px;
+            z-index: 100;
+        }
+        .eye-left {
+            height: 40px;
+            width: 45px;
+            border: 10px solid #e991cb;
+            display: inline-block;
+            background: #fafafa;
+            border-radius: 50%;
+            position: relative;
+            top: 24px;
+            left: -16px;
+        }
+        .eye-right {
+            height: 40px;
+            width: 45px;
+            border: 10px solid #e991cb;
+            display: inline-block;
+            background: #fafafa;
+            border-radius: 50%;
+            position: relative;
+            top: -18px;
+            left: -22px;
+        }
+        .eye-inner {
+            height: 0px;
+            width: 0px;
+            display: inline-block;
+            border-radius: 50%;
+            border: 15px solid black;
+            border-top: 10px solid black;
+            position: relative;
+            left: 17px;
+            top: 6px;
+            transform: rotate(74deg);
+        }
+        .mouth {
+            clip: rect(0px, 50px, 100px, 0px);
+            height: 10px;
+            width: 10px;
+        }
+        .wrapper {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            clip: rect(0px, 100px, 100px, 50px);
+            left: 128px;
+            top: 102px;
+            transform: rotate(42deg);
+        }
+        .circle-1 {
+            border: 25px solid rgba(233, 145, 204, 0);
+            border-radius: 50px;
+            position: relative;
+            clip: rect(0px, 50px, 100px, 0px);
+        }
+        .circle-2 {
+            border: 25px solid #e991cb;
+            border-radius: 50%;
+            position: relative;
+            clip: rect(0px, 50px, 100px, 0px);
+            transform: rotate(270deg);
+            top: -100px;
+        }
+        .nose-left {
+            height: 40px;
+            width: 35px;
+            position: relative;
+            background: #e991cb;
+            display: inline-block;
+            left: 26px;
+            top: 52px;
+            border-radius: 50%;;
+        }
+        .nose-right {
+            height: 40px;
+            width: 35px;
+            position: relative;
+            background: #e991cb;
+            display: inline-block;
+            left: 36px;
+            top: 70px;
+            border-radius: 50%;;
+        }
+        .pig-body{
+            height: 250px;
+            width: 255px;
+            border: 10px solid #5b91c2;
+            border-radius: 50%;
+            display: inline-block;
+            position: relative;
+            left: 44px;
+            top: -173px;
+            background: #7ea7df;
+            z-index: 50;
+        }
+        .hand-left{
+            height: 98px;
+            width: 10px;
+            background: #e991cb;
+            display: inline-block;
+            border-radius: 38%;
+            position: relative;
+            left: -253px;
+            top: -262px;
+            z-index: 60;
+            transform: rotate(71deg);
+        }
+        .hand-right{
+            height: 98px;
+            width: 10px;
+            background: #e991cb;
+            display: inline-block;
+            border-radius: 40%;
+            position: relative;
+            left: 5px;
+            top: -257px;
+            z-index: 39;
+            transform: rotate(-71deg);
+        }
+         .finger-part1 {
+            display: inline-block;
+            height: 30px;
+            width: 10px;
+            position: relative;
+            background: #e991cb;
+            left: -288px;
+            border-radius: 26%;
+            top: -277px;
+            transform: rotate(22deg);
+        }
+        .finger-part2 {
+            display: inline-block;
+            height: 30px;
+            width: 10px;
+            position: relative;
+            background: #e991cb;
+            left: -313px;
+            border-radius: 26%;
+            top: -298px;
+            transform: rotate(-66deg);
+        }
+        .finger-part3 {
+            display: inline-block;
+            height: 30px;
+            width: 10px;
+            position: relative;
+            background: #e991cb;
+            left: 19px;
+            border-radius: 26%;
+            top: -289px;
+            transform: rotate(-122deg);
+        }
+        .finger-part4 {
+            display: inline-block;
+            height: 30px;
+            width: 10px;
+            position: relative;
+            background: #e991cb;
+            left: 1px;
+            border-radius: 26%;
+            top: -273px;
+            transform: rotate(-22deg);
+        }
+        
+        .ear{
+            height: 52px;
+            width: 13px;
+            display: inline-block;
+            position: relative;
+            background: #fab1e6;
+            border: 10px solid #e991cb;
+            z-index: 1000;
+            left: -280px;
+            transform: rotate(-39deg);
+            border-radius: 57%;
+            border-bottom: 10px solid #fab1e6;
+        }
+        .ear-left{
+            top: -607px;
+            margin-right: 29px;
+        }
+        .ear-right{
+            top: -626px;
+            left: -301px !important;
+        }
+        .tail{
+            height: 30px;
+            width: 30px;
+            border: 10px solid transparent;
+            border-bottom: 10px solid #e991cb;
+            border-right: 10px solid #e991cb;
+            border-radius: 50%;
+            position: relative;
+            right: -128px;
+            top: -256px;
+            transform: rotate(208deg);
+        }
+        .tail::after{
+            transform: rotate(90deg);
+            content: "";
+            height: 60px;
+            width: 60px;
+            border: 10px solid transparent;
+            border-bottom: 10px solid #e991cb;
+            border-left: 10px solid #e991cb;
+            border-right: 10px solid #e991cb00;
+            border-radius: 50%;
+            position: absolute;
+            right: -18px;
+            top: -13px;
+        }
+        .tail::before{
+            transform: rotate(86deg);
+            content: "";
+            height: 60px;
+            width: 60px;
+            border: 10px solid transparent;
+            border-bottom: 10px solid #e991cb;
+            border-left: 10px solid #e991cb;
+            border-right: 10px solid #d3c2cd00;
+            border-radius: 50%;
+            position: absolute;
+            right: -34px;
+            top: -35px;
+        }
+        .footer{
+            display: inline-block;
+            position: relative;
+            border-left: 5px solid #e991cb;
+            border-right: 5px solid #e991cb;
+            top: -286px;
+            left: 238px;
+            z-index: 66;
+            border-radius: 26%;
+        }
+        .footer:nth-child(1n){
+            border-top: 40px solid #e991cb;
+            border-bottom: 60px solid #e991cb;
+        }
+        .footer:nth-child(2n){
+            border-top: 20px solid #e991cb;
+            border-bottom: 30px solid #e991cb;
+            margin-left: 89px;
+            z-index: 49;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background">
+        <div class="peach">
+            <div class="nose">
+                <div class="nose-left">
+
+                </div>
+                <div class="nose-right">
+
+                </div>
+            </div>
+            <div class="head">
+                <div class="blush">
+
+                </div>
+
+                <div class="eye-left">
+                    <div class="eye-inner">
+
+                    </div>
+                </div>
+                <div class="eye-right">
+                    <div class="eye-inner">
+
+                    </div>
+                </div>
+                <div class="mouth">
+                    <div class="wrapper">
+                        <div class="circle-1"></div>
+                        <div class="circle-2"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="head-nose">
+
+            </div>
+
+            <div class="pig-body">
+            </div>
+        </div>
+
+        <span class="hand-left">
+        </span>
+
+        <span class="finger-part1"></span>            
+        <span class="finger-part2"></span>  
+
+        <span class="hand-right"></span>
+        <span class="finger-part3"></span>            
+        <span class="finger-part4"></span>  
+
+        <div class="ear ear-left">
+
+        </div>
+        <div class="ear ear-right">
+                
+        </div>
+
+        <div class="tail"></div>
+        
+        <div class="footer">
+
+        </div>
+
+        <div class="footer">
+                
+        </div>
+    </div>
+</body>
+
+</html>
