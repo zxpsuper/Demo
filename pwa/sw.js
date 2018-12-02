@@ -1,28 +1,31 @@
-var cacheName = '10001'
+// 每次修改版本或者页面内容，需同时更改cacheName
+var cacheName = "ssfs1";
 
 var CURRENT_CACHES = {
-  prefetch: 'prefetch-cache-v' + cacheName
+  prefetch: "prefetch-cache-v" + cacheName
 };
 
+// 缓存的静态资源相对路径
 let arr = [
-  './index.html',
-  './sw/assets/css/style1.css',
-  './sw/assets/img/1_img.png',
-  './sw/assets/img/2_img.png',
-  './sw/assets/img/3_img.png',
-  './sw/assets/img/2560 1440 b.png',
-  './sw/assets/img/5_img.png',
-  './sw/assets/img/news_banner_img.png',
-  './sw/assets/img/WeChat Image_201807121619171.jpg',
-]
+  "./index.html",
+  "./sw/assets/css/style1.css",
+  "./sw/assets/img/1_img.png",
+  "./sw/assets/img/2_img.png",
+  "./sw/assets/img/3_img.png",
+  "./sw/assets/img/2560 1440 b.png",
+  "./sw/assets/img/5_img.png",
+  "./sw/assets/img/news_banner_img.png",
+  "./sw/assets/img/WeChat Image_201807121619171.jpg"
+];
 // install 过程缓存资源。
 self.addEventListener("install", function(event) {
   var now = Date.now();
-  var urlsToPrefetch = arr
+  var urlsToPrefetch = arr;
   event.waitUntil(
     caches
       .open(CURRENT_CACHES.prefetch)
       .then(function(cache) {
+        // 访问资源并存入 cache
         var cachePromises = urlsToPrefetch.map(function(urlToPrefetch) {
           var url = new URL(urlToPrefetch, location.href);
           url.search += (url.search ? "&" : "?") + "cache-bust=" + now;
@@ -47,7 +50,7 @@ self.addEventListener("install", function(event) {
               );
             });
         });
-
+        // 等待所有的异步请求
         return Promise.all(cachePromises).then(function() {
           // 立即变为激活状态
           self.skipWaiting();
@@ -60,11 +63,13 @@ self.addEventListener("install", function(event) {
 });
 
 self.addEventListener("activate", function(event) {
+  console.log("server work is activate");
   var expectedCacheNames = Object.keys(CURRENT_CACHES).map(function(key) {
     return CURRENT_CACHES[key];
   });
 
   event.waitUntil(
+    // 判断 cacheName 是否有变化，若有变化则相应删除对应的缓存
     caches.keys().then(function(cacheNames) {
       return Promise.all(
         cacheNames.map(function(cacheName) {
@@ -82,26 +87,30 @@ self.addEventListener("activate", function(event) {
   );
 });
 
+// 网络请求，有限选择 cache
 self.addEventListener("fetch", function(event) {
   event.respondWith(
-    // caches.match() will look for a cache entry in all of the caches available to the service worker.
-    // It's an alternative to first opening a specific named cache and then matching on that.
     caches.match(event.request).then(function(response) {
-      if (response) return response;
-      // event.request will always have the proper mode set ('cors, 'no-cors', etc.) so we don't
-      // have to hardcode 'no-cors' like we do when fetch()ing in the install handler.
-      return fetch(event.request)
-        .then(function(response) {
-          // console.log('Response from network is:', response);
-          return response;
-        })
-        .catch(function(error) {
-          // This catch() will handle exceptions thrown from the fetch() operation.
-          // Note that a HTTP error response (e.g. 404) will NOT trigger an exception.
-          // It will return a normal response object that has the appropriate error code set.
-          // console.error('Fetching failed:', error);
-          throw error;
+      console.log(response, 222);
+      if (response) {
+        return response;
+      }
+
+      var fetchRequest = event.request.clone();
+
+      return fetch(fetchRequest).then(function(fetchResponse) {
+        if (!fetchResponse || fetchResponse.status !== 200) {
+          return fetchResponse;
+        }
+
+        var responseToCache = fetchResponse.clone();
+
+        caches.open(CURRENT_CACHES.prefetch).then(function(cache) {
+          cache.put(event.request, responseToCache);
         });
+
+        return fetchResponse;
+      });
     })
   );
 });
