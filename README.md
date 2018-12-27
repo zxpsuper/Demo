@@ -4,6 +4,12 @@
 
 ### **个人小项目展示及源码小仓库。**
 
+10. **一款轮播组件的诞生**
+
+- [相关文章——一款轮播组件的诞生](https://juejin.im/post/5c24925fe51d4502a232fb6b)
+
+- [源码](https://github.com/zxpsuper/suporka-carousal)+[Demo](https://zxpsuper.github.io/Demo/carousal/index.html)
+
 9. **ES6 手写一个“辨色”小游戏**
 
 - [相关文章——ES6 手写一个“辨色”小游戏](https://segmentfault.com/a/1190000016444812)
