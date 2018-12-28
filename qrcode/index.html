@@ -1,0 +1,87 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Suporka Vue App</title>
+    <style>
+      .container {
+        width: 1200px;
+
+        padding: 60px 0;
+        margin: 0 auto;
+      }
+      input {
+        display: inline-block;
+        width: 200px;
+        height: 32px;
+        line-height: 1.5;
+        padding: 4px 7px;
+        margin-bottom: 20px;
+        font-size: 12px;
+        border: 1px solid #dcdee2;
+        border-radius: 4px;
+        color: #515a6e;
+        background-color: #fff;
+        background-image: none;
+        position: relative;
+        cursor: text;
+        transition: border 0.2s ease-in-out, background 0.2s ease-in-out,
+          box-shadow 0.2s ease-in-out;
+      }
+      button {
+        color: #fff;
+        background-color: #19be6b;
+        border-color: #19be6b;
+        outline: 0;
+        vertical-align: middle;
+        line-height: 1.5;
+        display: inline-block;
+        margin-bottom: 0;
+        font-weight: 400;
+        text-align: center;
+        -ms-touch-action: manipulation;
+        touch-action: manipulation;
+        cursor: pointer;
+        background-image: none;
+        border: 1px solid transparent;
+        white-space: nowrap;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        padding: 5px 15px 6px;
+        font-size: 12px;
+        border-radius: 4px;
+        transition: color 0.2s linear, background-color 0.2s linear,
+          border 0.2s linear, box-shadow 0.2s linear;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <input
+        type="text"
+        placeholder="请输入您想转化成二维码的字符串"
+        id="input"
+      />
+      <button onclick="creatQRcode()">一键生成</button>
+      <div id="qrcode"></div>
+    </div>
+    <script src="./qrcode-dev.js"></script>
+    <script type="text/javascript">
+      var qrcode = null;
+      function creatQRcode() {
+        document.getElementById("qrcode").innerHTML = "";
+        qrcode = new QRCode(document.getElementById("qrcode"), {
+          text: document.getElementById("input").value,
+          width: 200,
+          height: 200,
+          colorDark: "#000000",
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel.H
+        });
+      }
+    </script>
+  </body>
+</html>
