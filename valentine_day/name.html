@@ -78,17 +78,19 @@
       <input type="text" id="name" />
     </div>
     <script>
-      document.getElementById("btn").addEventListener("click", function() {
-        let name = document.getElementById("name").value;
-        if (name === "") {
-          alert("请输入姓名");
-          return;
-        }
-        let url =
-          "https://zxpsuper.github.io/Demo/valentine_day/index.html?name=" +
-          encodeURIComponent(encodeURIComponent(name));
-        document.getElementById("card").innerHTML = url;
-      });
+      window.onload = function() {
+        document.getElementById("btn").addEventListener("click", function() {
+          let name = document.getElementById("name").value;
+          if (name === "") {
+            alert("请输入姓名");
+            return;
+          }
+          let url =
+            "https://zxpsuper.github.io/Demo/valentine_day/index.html?name=" +
+            encodeURIComponent(encodeURIComponent(name));
+          document.getElementById("card").innerHTML = url;
+        });
+      };
     </script>
     <div
       style="display: flex;margin-top: 40px;  flex-direction:column;align-items: center "
