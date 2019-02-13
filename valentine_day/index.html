@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <title>情人节快乐</title>
     <style>
       img {
         width: 100%;
@@ -65,7 +65,7 @@
     >
       <img src="avatar.jpg" alt="" class="avatar" />
       <img src="avatar.jpg" alt="" class="avatar shadow" />
-      <span style="margin-left: 10px">小皮咖</span>
+      <span style="margin-left: 10px" id="name">小皮咖</span>
     </div>
     <marquee scrolldelay="0" scrollamount="20">
       <img src="1.png" />
@@ -80,10 +80,24 @@
       您的浏览器不支持 audio 标签。
     </audio>
     <div class="btn-group">
-      <div class="sure" onclick="alert('感谢您的认可，晚安\\(^o^)/~')">
+      <div class="sure" onclick="alert('情人节快乐\\(^o^)/~')">
         确定
       </div>
       <div class="cancel" onclick="alert('取消无效，请重新选择')">取消</div>
     </div>
+    <script>
+      function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+          return r[2];
+        }
+        return null;
+      }
+      window.onload = function() {
+        let name = getQueryString("name");
+        document.getElementById("name").innerHTML = decodeURIComponent(name);
+      };
+    </script>
   </body>
 </html>
