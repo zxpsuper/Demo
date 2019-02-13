@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      img {
+        width: 100%;
+      }
+      body {
+        min-height: 660px;
+        background: linear-gradient(#1d2b64, #f8cdda);
+        color: #fff;
+        font-family: PingFangSC-Regular;
+      }
+      .avatar {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+      }
+      .shadow {
+        position: absolute;
+        left: 0;
+        z-index: -1;
+        filter: blur(50px);
+      }
+      .btn-group {
+        display: flex;
+        margin-top: 40px;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .btn-group div {
+        flex: 1;
+        text-align: center;
+      }
+      .sure {
+        padding: 14px 0;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 127, 87, 1) 0%,
+          rgba(221, 40, 39, 1) 100%
+        );
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+      }
+      .cancel {
+        padding: 14px 0;
+        background: #eee;
+        color: #333;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+      }
+      marquee {
+        background: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      style="position: relative; display: flex; align-items: center; margin-bottom: 10px"
+    >
+      <img src="avatar.jpg" alt="" class="avatar" />
+      <img src="avatar.jpg" alt="" class="avatar shadow" />
+      <span style="margin-left: 10px">小皮咖</span>
+    </div>
+    <marquee scrolldelay="0" scrollamount="20">
+      <img src="1.png" />
+      <img src="2.png" />
+      <img src="3.png" />
+      <img src="4.png" />
+      <img src="5.png" />
+      <img src="6.png" />
+      <img src="7.png" />
+    </marquee>
+    <audio src="883565.mp3" autoplay loop>
+      您的浏览器不支持 audio 标签。
+    </audio>
+    <div class="btn-group">
+      <div class="sure" onclick="alert('感谢您的认可，晚安\\(^o^)/~')">
+        确定
+      </div>
+      <div class="cancel" onclick="alert('取消无效，请重新选择')">取消</div>
+    </div>
+  </body>
+</html>
