@@ -105,7 +105,6 @@
             let content = document.getElementById("card").innerHTML;
             if (!content) return;
             const input = document.createElement("input");
-            document.body.appendChild(input);
             input.setAttribute("value", content);
             input.select();
             if (document.execCommand("copy")) {
