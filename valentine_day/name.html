@@ -96,7 +96,7 @@
           }
           let url =
             "https://zxpsuper.github.io/Demo/valentine_day/index.html?name=" +
-            encodeURIComponent(name);
+            encodeURIComponent(encodeURIComponent(name));
           document.getElementById("card").innerHTML = url;
         });
         document
@@ -104,8 +104,16 @@
           .addEventListener("click", function() {
             let content = document.getElementById("card").innerHTML;
             if (!content) return;
-            window.clipboardData.setData("Text", content);
-            alert("复制成功!");
+            const input = document.createElement("input");
+            document.body.appendChild(input);
+            input.setAttribute("value", content);
+            input.select();
+            if (document.execCommand("copy")) {
+              document.execCommand("copy");
+              alert("复制成功!");
+            } else {
+              alert("复制失败，自己动手吧");
+            }
           });
       };
     </script>

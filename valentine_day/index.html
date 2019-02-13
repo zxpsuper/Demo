@@ -100,7 +100,9 @@
       }
       window.onload = function() {
         let name = getQueryString("name");
-        document.getElementById("name").innerHTML = decodeURIComponent(name);
+        document.getElementById("name").innerHTML = decodeURIComponent(
+          decodeURIComponent(name)
+        );
       };
     </script>
   </body>
