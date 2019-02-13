@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>输入名字</title>
+    <style>
+      body {
+        min-height: 100vh;
+        background: linear-gradient(#1d2b64, #f8cdda);
+        color: #fff;
+        font-family: PingFangSC-Regular;
+        padding: 0;
+        margin: 0;
+      }
+      input {
+        display: inline-block;
+        width: 80%;
+        height: 32px;
+        line-height: 1.5;
+        padding: 4px 7px;
+        margin: 20px auto 0 auto;
+        font-size: 16px;
+        border: 1px solid #dcdee2;
+        border-radius: 4px;
+        color: #515a6e;
+        background-color: #fff;
+        background-image: none;
+        position: relative;
+        cursor: text;
+        -webkit-transition: border 0.2s ease-in-out, background 0.2s ease-in-out,
+          -webkit-box-shadow 0.2s ease-in-out;
+        transition: border 0.2s ease-in-out, background 0.2s ease-in-out,
+          -webkit-box-shadow 0.2s ease-in-out;
+        transition: border 0.2s ease-in-out, background 0.2s ease-in-out,
+          box-shadow 0.2s ease-in-out;
+        transition: border 0.2s ease-in-out, background 0.2s ease-in-out,
+          box-shadow 0.2s ease-in-out, -webkit-box-shadow 0.2s ease-in-out;
+      }
+      .button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 10;
+        width: 80%;
+        height: 40px;
+        background: rgba(89, 126, 247, 1);
+        border-radius: 44px;
+        font-size: 14px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 1);
+        line-height: 20px;
+        cursor: pointer;
+      }
+      .button-shadow {
+        width: 80%;
+        height: 40px;
+        background: rgba(106, 140, 253, 1);
+        border-radius: 44px;
+        opacity: 0.3081;
+        -webkit-filter: blur(4px);
+        filter: blur(4px);
+        margin-top: -36px;
+      }
+      #card {
+        width: 80%;
+        box-sizing: border-box;
+        padding: 20px 12px;
+        word-wrap: break-word;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="text-align: center; margin-top: 40px">
+      <h2>Happy Valentine's Day</h2>
+      <input type="text" id="name" />
+    </div>
+    <div
+      style="display: flex;margin-top: 40px;  flex-direction:column;align-items: center "
+    >
+      <div class="button" id="btn">确定</div>
+      <div class="button-shadow"></div>
+      <div id="card"></div>
+
+      <p id="copy-btn">点击复制网址</p>
+    </div>
+    <script>
+      window.onload = function() {
+        document.getElementById("btn").addEventListener("click", function() {
+          let name = document.getElementById("name").value;
+          if (name === "") {
+            alert("请输入姓名");
+            return;
+          }
+          let url =
+            "https://zxpsuper.github.io/Demo/valentine_day/index.html?name=" +
+            encodeURIComponent(name);
+          document.getElementById("card").innerHTML = url;
+        });
+        document
+          .getElementById("copy-btn")
+          .addEventListener("click", function() {
+            let content = document.getElementById("card").innerHTML;
+            if (!content) return;
+            window.clipboardData.setData("Text", content);
+            alert("复制成功!");
+          });
+      };
+    </script>
+  </body>
+</html>
