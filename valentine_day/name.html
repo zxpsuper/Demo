@@ -77,6 +77,19 @@
       <h2>Happy Valentine's Day</h2>
       <input type="text" id="name" />
     </div>
+    <script>
+      document.getElementById("btn").addEventListener("click", function() {
+        let name = document.getElementById("name").value;
+        if (name === "") {
+          alert("请输入姓名");
+          return;
+        }
+        let url =
+          "https://zxpsuper.github.io/Demo/valentine_day/index.html?name=" +
+          encodeURIComponent(encodeURIComponent(name));
+        document.getElementById("card").innerHTML = url;
+      });
+    </script>
     <div
       style="display: flex;margin-top: 40px;  flex-direction:column;align-items: center "
     >
@@ -84,39 +97,7 @@
       <div class="button-shadow"></div>
       <div id="card"></div>
 
-      <p id="copy-btn">点击复制网址</p>
+      <p id="copy-btn">复制以上网址发给他人吧</p>
     </div>
-    <script>
-      window.onload = function() {
-        document.getElementById("btn").addEventListener("click", function() {
-          let name = document.getElementById("name").value;
-          if (name === "") {
-            alert("请输入姓名");
-            return;
-          }
-          let url =
-            "https://zxpsuper.github.io/Demo/valentine_day/index.html?name=" +
-            encodeURIComponent(encodeURIComponent(name));
-          document.getElementById("card").innerHTML = url;
-        });
-        document
-          .getElementById("copy-btn")
-          .addEventListener("click", function() {
-            let content = document.getElementById("card").innerHTML;
-            if (!content) return;
-            const input = document.createElement("input");
-            document.body.appendChild(input);
-            input.setAttribute("style", "display:none");
-            input.setAttribute("value", content);
-            input.select();
-            if (document.execCommand("copy")) {
-              document.execCommand("copy");
-              alert("复制成功!");
-            } else {
-              alert("复制失败，自己动手吧");
-            }
-          });
-      };
-    </script>
   </body>
 </html>
