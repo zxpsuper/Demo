@@ -70,36 +70,44 @@
         padding: 20px 12px;
         word-wrap: break-word;
       }
+      @media screen and (min-width: 800px) {
+        .container {
+          width: 350px;
+          margin: 0 auto;
+        }
+      }
     </style>
   </head>
   <body>
-    <div style="text-align: center; margin-top: 40px">
-      <h2>Happy Valentine's Day</h2>
-      <input type="text" id="name" />
-    </div>
-    <script>
-      window.onload = function() {
-        document.getElementById("btn").addEventListener("click", function() {
-          let name = document.getElementById("name").value;
-          if (name === "") {
-            alert("请输入姓名");
-            return;
-          }
-          let url =
-            "https://zxpsuper.github.io/Demo/valentine_day/index.html?name=" +
-            encodeURIComponent(encodeURIComponent(name));
-          document.getElementById("card").innerHTML = url;
-        });
-      };
-    </script>
-    <div
-      style="display: flex;margin-top: 40px;  flex-direction:column;align-items: center "
-    >
-      <div class="button" id="btn">确定</div>
-      <div class="button-shadow"></div>
-      <div id="card"></div>
+    <div class="container">
+      <div style="text-align: center; margin-top: 40px">
+        <h2>Happy Valentine's Day</h2>
+        <input type="text" id="name" />
+      </div>
+      <script>
+        window.onload = function() {
+          document.getElementById("btn").addEventListener("click", function() {
+            let name = document.getElementById("name").value;
+            if (name === "") {
+              alert("请输入姓名");
+              return;
+            }
+            let url =
+              "https://zxpsuper.github.io/Demo/valentine_day/index.html?name=" +
+              encodeURIComponent(encodeURIComponent(name));
+            document.getElementById("card").innerHTML = url;
+          });
+        };
+      </script>
+      <div
+        style="display: flex;margin-top: 40px;  flex-direction:column;align-items: center "
+      >
+        <div class="button" id="btn">确定</div>
+        <div class="button-shadow"></div>
+        <div id="card"></div>
 
-      <p id="copy-btn">复制以上网址发给他人吧</p>
+        <p id="copy-btn">复制以上网址发给他人吧</p>
+      </div>
     </div>
   </body>
 </html>

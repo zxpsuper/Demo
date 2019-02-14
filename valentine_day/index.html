@@ -59,38 +59,46 @@
       marquee {
         background: none;
       }
+      @media screen and (min-width: 800px) {
+        .container {
+          width: 350px;
+          margin: 0 auto;
+        }
+      }
     </style>
   </head>
   <body>
-    <div style="padding: 12px">
-      <div
-        style="position: relative; display: flex; align-items: center; margin-bottom: 10px"
-      >
-        <img src="avatar.jpg" alt="" class="avatar" />
-        <img src="avatar.jpg" alt="" class="avatar shadow" />
-        <span style="margin-left: 10px" id="name">小皮咖</span>
-      </div>
-      <marquee scrolldelay="0" scrollamount="20">
-        <img src="1.png" />
-        <img src="2.png" />
-        <img src="3.png" />
-        <img src="4.png" />
-        <img src="5.png" />
-        <img src="6.png" />
-        <img src="7.png" />
-      </marquee>
-      <audio
-        src="http://att.chinauui.com/day_181211/20181211_8480d0323003455bd6de8CcQ3Eq28Mm9.mp3"
-        autoplay
-        loop
-      >
-        您的浏览器不支持 audio 标签。
-      </audio>
-      <div class="btn-group">
-        <div class="sure" onclick="alert('情人节快乐\\(^o^)/~')">
-          确定
+    <div class="container">
+      <div style="padding: 12px">
+        <div
+          style="position: relative; display: flex; align-items: center; margin-bottom: 10px"
+        >
+          <img src="avatar.jpg" alt="" class="avatar" />
+          <img src="avatar.jpg" alt="" class="avatar shadow" />
+          <span style="margin-left: 10px" id="name">小皮咖</span>
         </div>
-        <div class="cancel" onclick="alert('取消无效，请重新选择')">取消</div>
+        <marquee scrolldelay="0" scrollamount="20">
+          <img src="1.png" />
+          <img src="2.png" />
+          <img src="3.png" />
+          <img src="4.png" />
+          <img src="5.png" />
+          <img src="6.png" />
+          <img src="7.png" />
+        </marquee>
+        <audio
+          src="http://att.chinauui.com/day_181211/20181211_8480d0323003455bd6de8CcQ3Eq28Mm9.mp3"
+          autoplay
+          loop
+        >
+          您的浏览器不支持 audio 标签。
+        </audio>
+        <div class="btn-group">
+          <div class="sure" onclick="alert('情人节快乐\\(^o^)/~')">
+            确定
+          </div>
+          <div class="cancel" onclick="alert('取消无效，请重新选择')">取消</div>
+        </div>
       </div>
     </div>
     <script>
