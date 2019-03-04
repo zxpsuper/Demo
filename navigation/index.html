@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>顺鹿小清新导航</title>
+    <link rel="stylesheet" href="./css/normalize.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <header>
+      <ul id="searchEnginPic" class="searchEnginPic">
+        <li class="active">
+          <a href="https://www.google.com.hk/" target="_blank"
+            ><img src="./image/google.png" alt="google"
+          /></a>
+        </li>
+        <li>
+          <a href="https://www.baidu.com/" target="_blank"
+            ><img src="./image/baidu.png" alt="百度一下"
+          /></a>
+        </li>
+      </ul>
+      <form action="" id="searchBar" class="searchBar">
+        <ul id="searchEnginLogo" class="searchEnginLogo">
+          <li class="active">
+            <img src="./image/google.svg" alt="google" />
+          </li>
+          <li>
+            <img src="./image/baidu.svg" alt="baidu" />
+          </li>
+        </ul>
+        <input type="text" id="inputBar" />
+        <button id="searchBtn" class="searchBtn"></button>
+      </form>
+    </header>
+    <main>
+      <div id="main" class="wrapper"></div>
+    </main>
+    <footer class="description">
+      <h3>小Tips</h3>
+      <ul class="tips-content">
+        <li>1. 按键盘上相应字母进入你想要到的网站</li>
+        <li>2. 字母相关的导航地址可将鼠标悬浮其上查看</li>
+        <li>3. 鼠标移动到键盘的按键时，可自行编辑导航网址</li>
+        <li>4. 编辑后，网址会保留下来，不用担心刷新之后不见了</li>
+        <li>5. '.'代表未设置网站或无favicon</li>
+      </ul>
+    </footer>
+    <div class="copeyright">powered by 小皮咖</div>
+    <script src="./js/main.js"></script>
+  </body>
+</html>
