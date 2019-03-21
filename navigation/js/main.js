@@ -23,7 +23,7 @@ function init() {
     q: "qq.com",
     w: "wangdoc.com",
     e: undefined,
-    r: "39.105.7.248:3000/",
+    r: "react.docschina.org",
     t: "",
     y: "youtube.com",
     i: "iciba.com",
@@ -36,7 +36,7 @@ function init() {
     g: "github.com",
     h: undefined,
     j: "juejin.im",
-    k: "kstore.justgoai.com/#/home",
+    k: "",
     l: "",
     z: "zhihu.com",
     x: undefined,
@@ -50,7 +50,7 @@ function init() {
     q: "QQ",
     w: "wangdoc.com",
     e: undefined,
-    r: "",
+    r: "React",
     t: "",
     y: "youtube.com",
     i: "iciba.com",
@@ -153,8 +153,9 @@ function createButton(id) {
     //获取当前的id
     let key = button2["id"];
     //用户输入一个网址
-    let web = prompt("请输入一个网址(不含http)：");
-    let itemTitle = prompt("请输入此网址的标题：");
+    let web = prompt("请输入一个网址(不含http)："),
+      itemTitle = "";
+    if (web) itemTitle = prompt("请输入此网址的标题：");
     //将原来的hash给替换掉
     hash[key] = web;
     title[key] = itemTitle;
