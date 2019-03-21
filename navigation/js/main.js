@@ -24,56 +24,53 @@ function init() {
     w: "wangdoc.com",
     e: undefined,
     r: "39.105.7.248:3000/",
-    t:
-      "trello.com/b/wftUTuHv/%E9%A0%86%E9%B9%BF-%E7%A0%94%E5%8F%91%E7%9C%8B%E6%9D%BF",
+    t: "",
     y: "youtube.com",
     i: "iciba.com",
-    o: "docs.qq.com/sheet/DQmZweHZUeVRmUlVk?opendocxfrom=admin&tab=BB08J2",
-    p: "docs.qq.com/sheet/DQktQU3dQVEhERUxk?tab=BB08J2",
+    o: "",
+    p: "",
     a: undefined,
-    s: "www.showdoc.cc/255678178917392?page_id=1499941481423123",
-    d:
-      "www.showdoc.cc/item/password/205382411199407?page_id=0&redirect=%2F205382411199407",
+    s: "",
+    d: "",
     f: undefined,
     g: "github.com",
     h: undefined,
     j: "juejin.im",
     k: "kstore.justgoai.com/#/home",
-    l:
-      "lanhuapp.com/web/#/item/board?type=share_mark&pid=b1fa4edb-cb54-44e6-b244-a92c724f0fd3&param=d9b9499a-e42b-4ab0-8897-c58884f23b33",
+    l: "",
     z: "zhihu.com",
     x: undefined,
     c: "csdn.net",
     v: "cn.vuejs.org/",
-    b: "39.105.7.248:8000/boss_site/",
-    n: "47.107.162.112:8888/apps/files/?dir=/&fileid=6666",
+    b: "",
+    n: "",
     m: "mail.163.com"
   };
   let title = {
     q: "QQ",
     w: "wangdoc.com",
     e: undefined,
-    r: "Redmine bug系统",
-    t: "Trello",
+    r: "",
+    t: "",
     y: "youtube.com",
     i: "iciba.com",
-    o: "前端B端进度表",
-    p: "前端C端进度表",
+    o: "",
+    p: "",
     a: undefined,
-    s: "showDoc管理后台",
-    d: "showDoc用户端",
+    s: "",
+    d: "",
     f: undefined,
     g: "github.com",
     h: undefined,
     j: "juejin.im",
-    k: "Kstore测试环境",
-    l: "蓝湖",
+    k: "",
+    l: "",
     z: "zhihu.com",
     x: undefined,
     c: "csdn.net",
     v: "VUE",
-    b: "商城boss端",
-    n: "nextCloud",
+    b: "",
+    n: "",
     m: "mail.163.com"
   };
   let hasInLocalStorage = getFormLocalStorage("data");
@@ -174,7 +171,7 @@ function createButton(id) {
 
 function createImage(domain) {
   let img = tag("img");
-  let arr = ["lanhuapp.com", "47.107.162.112:8888", "cn.vuejs.org"];
+  let arr = ["lanhuapp.com", "cn.vuejs.org"];
   if (domain) {
     if (checkArr(arr, domain)) {
       dealFavicon(domain, img);
@@ -201,8 +198,6 @@ function checkArr(arr, domain) {
 function dealFavicon(domain, img) {
   if (domain.indexOf("lanhuapp.com") > -1) {
     img.src = "http://betacdn.lanhuapp.com/web/static/favicon.ico";
-  } else if (domain.indexOf("47.107.162.112:8888") > -1) {
-    img.src = "http://47.107.162.112:8888/core/img/favicon.ico";
   } else if (domain.indexOf("cn.vuejs.org") > -1) {
     img.src = "https://cn.vuejs.org/images/icons/favicon-32x32.png";
   }
