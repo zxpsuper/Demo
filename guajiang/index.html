@@ -1,87 +1,132 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>演示：使用HTML5实现刮刮卡效果</title>
-<style type="text/css">
-.demo{width:320px; margin:10px auto 20px auto; min-height:300px;}
-.msg{text-align:center; height:32px; line-height:32px; font-weight:bold; margin-top:50px}
-</style>
-</head>
-
-<body>
-<div id="main">
-   <div class="msg">刮开灰色部分看看，<a href="javascript:void(0)" onClick="window.location.reload()">再来一次</a></div>
-   <div class="demo">
-   		<canvas></canvas>
-   </div>
-</div>
-
-<script type="text/javascript">
-var bodyStyle = document.body.style;
-
-bodyStyle.mozUserSelect = 'none';
-bodyStyle.webkitUserSelect = 'none';
-
-var img = new Image();
-var canvas = document.querySelector('canvas');
-
-canvas.style.position = 'absolute';
-var imgs = ['p_0.jpg','p_1.jpg'];
-var num = Math.floor(Math.random()*2);
-img.src = imgs[num];
-
-img.addEventListener('load', function(e) {
-	var ctx;
-    var w = img.width,
-    	h = img.height;
-    var offsetX = canvas.offsetLeft,
-    	offsetY = canvas.offsetTop;
-    var mousedown = false;
-
-    function eventDown(e){
-      e.preventDefault();
-      mousedown=true;
-    }
-
-    function eventUp(e){
-      e.preventDefault();
-      mousedown=false;
-    }
-
-    function eventMove(e){
-      e.preventDefault();
-    	if(mousedown) {
-        if(e.changedTouches){
-          e=e.changedTouches[0];
-        }
-        var x = (e.clientX + document.body.scrollLeft || e.pageX) - offsetX || 0,
-          y = (e.clientY + document.body.scrollTop || e.pageY) - offsetY || 0;
-       	with(ctx) {
-          beginPath();
-          arc(x, y, 10, 0, Math.PI * 2);
-          fill();
-       	}
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>演示：使用HTML5实现刮刮卡效果</title>
+    <style type="text/css">
+      .demo {
+        width: 320px;
+        margin: 10px auto 20px auto;
+        min-height: 300px;
       }
-    }
-    console.log(w)
-    canvas.width=w;
-    canvas.height=h;
-    canvas.style.backgroundImage='url('+img.src+')';
-    ctx=canvas.getContext('2d');
-    ctx.fillStyle = 'gray';
-    ctx.fillRect(0, 0, w, h);
+      .msg {
+        text-align: center;
+        height: 32px;
+        line-height: 32px;
+        font-weight: bold;
+        margin-top: 50px;
+      }
+    </style>
+  </head>
 
-    ctx.globalCompositeOperation = 'destination-out';
+  <body>
+    <div id="main">
+      <div class="msg">
+        刮开灰色部分看看，<a
+          href="javascript:void(0)"
+          onClick="window.location.reload()"
+          >再来一次</a
+        >
+      </div>
+      <div class="demo">
+        <canvas></canvas>
+      </div>
+    </div>
 
-    canvas.addEventListener('touchstart', eventDown);
-    canvas.addEventListener('touchend', eventUp);
-    canvas.addEventListener('touchmove', eventMove);
-    canvas.addEventListener('mousedown', eventDown);
-    canvas.addEventListener('mouseup', eventUp);
-    canvas.addEventListener('mousemove', eventMove);
-});
-</script>
-</body>
+    <script type="text/javascript">
+      var bodyStyle = document.body.style;
+
+      bodyStyle.mozUserSelect = "none";
+      bodyStyle.webkitUserSelect = "none";
+
+      var img = new Image();
+      var canvas = document.querySelector("#canvas");
+
+      canvas.style.position = "absolute";
+      var imgs = ["p_0.jpg", "p_1.jpg"];
+      var num = Math.floor(Math.random() * 2);
+      img.src = imgs[num];
+
+      img.addEventListener("load", function(e) {
+        var ctx;
+        var w = img.width,
+          h = img.height;
+        var offsetX = canvas.offsetLeft,
+          offsetY = canvas.offsetTop;
+        var mousedown = false;
+
+        function eventDown(e) {
+          e.preventDefault();
+          mousedown = true;
+        }
+
+        function eventUp(e) {
+          e.preventDefault();
+          mousedown = false;
+        }
+
+        function eventMove(e) {
+          e.preventDefault();
+          if (mousedown) {
+            if (e.changedTouches) {
+              e = e.changedTouches[0];
+            }
+            var x =
+                (e.clientX + document.body.scrollLeft || e.pageX) - offsetX ||
+                0,
+              y =
+                (e.clientY + document.body.scrollTop || e.pageY) - offsetY || 0;
+            with (ctx) {
+              beginPath();
+              arc(x, y, 10, 0, Math.PI * 2);
+              fill();
+            }
+          }
+          handleFilledPercentage(getFilledPercentage());
+        }
+        // 计算已经刮过的区域占整个区域的百分比
+        function getFilledPercentage() {
+          let imgData = ctx.getImageData(0, 0, w, h);
+          // imgData.data是个数组，存储着指定区域每个像素点的信息，数组中4个元素表示一个像素点的rgba值
+          let pixels = imgData.data;
+          let transPixels = [];
+          for (let i = 0; i < pixels.length; i += 4) {
+            // 严格上来说，判断像素点是否透明需要判断该像素点的a值是否等于0，
+            // 为了提高计算效率，这儿设置当a值小于128，也就是半透明状态时就可以了
+            if (pixels[i + 3] < 128) {
+              transPixels.push(pixels[i + 3]);
+            }
+          }
+          return (
+            ((transPixels.length / (pixels.length / 4)) * 100).toFixed(2) + "%"
+          );
+        }
+        // 设置阈值，去除灰色涂层
+        function handleFilledPercentage(percentage) {
+          percentage = percentage || 0;
+          if (parseInt(percentage) > 50) {
+            // 当像素点的个数超过  50% 时，清空画布，显示底图
+            ctx.clearRect(0, 0, w, h);
+          }
+        }
+        console.log(w);
+        canvas.width = w;
+        canvas.height = h;
+        canvas.style.backgroundImage = "url(" + img.src + ")";
+        ctx = canvas.getContext("2d");
+        ctx.fillStyle = "gray";
+        ctx.fillRect(0, 0, w, h);
+
+        ctx.globalCompositeOperation = "destination-out";
+
+        canvas.addEventListener("touchstart", eventDown);
+        canvas.addEventListener("touchend", eventUp);
+        canvas.addEventListener("touchmove", eventMove);
+        canvas.addEventListener("mousedown", eventDown);
+        canvas.addEventListener("mouseup", eventUp);
+        canvas.addEventListener("mousemove", eventMove);
+      });
+    </script>
+  </body>
 </html>
