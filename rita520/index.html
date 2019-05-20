@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>菜新鲜520抽奖大转盘</title>
+    <style>
+      body {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 10px;
+        width: 100%;
+        min-height: 100vh;
+        background: linear-gradient(to bottom right, #fd6585, #0d25b9);
+      }
+      .canvas {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>菜新鲜520抽奖大转盘</h3>
+    <span style="color: #fff;line-height: 20px">点击立即抽奖即可哟！！</span>
+    <canvas id="canvas" class="canvas"></canvas>
+
+    <div style="margin-top: 20px">
+      <a href="https://zxpsuper.github.io/Demo/letter">520的小信封</a>
+    </div>
+  </body>
+  <script src="./Global.js"></script>
+  <!-- <script src="./RouletteWheel.js"></script>
+  <script src="./ScratchCard.js"></script> -->
+  <script src="./Sudoku.js"></script>
+  <script>
+    var canvas = document.getElementById("canvas"),
+      context = canvas.getContext("2d");
+
+    canvas.height = canvas.width = (document.body.clientWidth - 12) * 3;
+    canvas.style = `width: ${document.body.clientWidth - 12}px`;
+    let luckDraw = new Sudoku({
+      sudokuSize: canvas.width,
+      scalingRatio: 3,
+      priceIndex: 7,
+      awards: [
+        {
+          type: "image",
+          content:
+            "https://user-gold-cdn.xitu.io/2019/5/20/16ad2c895ed87553?w=1024&h=1024&f=jpeg&s=76069",
+          text: "走，我们去买雪糕吃"
+        },
+        {
+          type: "image",
+          content:
+            "https://user-gold-cdn.xitu.io/2019/5/20/16ad47850e4224ff?w=690&h=690&f=jpeg&s=39137",
+          text: "边吃辣条边看剧"
+        },
+        { type: "losing", content: "神秘大礼包" },
+        {
+          type: "image",
+          content:
+            "https://user-gold-cdn.xitu.io/2019/5/20/16ad47a480b96e2f?w=400&h=400&f=jpeg&s=17139",
+          text: "送你一个值钱的拥抱"
+        },
+        {
+          type: "image",
+          content:
+            "https://user-gold-cdn.xitu.io/2019/5/18/16aca7c1efdeeb2f?w=300&h=300&f=gif&s=13454",
+          text: "mua!!  💗  mua!!"
+        },
+        {
+          type: "image",
+          content:
+            "https://user-gold-cdn.xitu.io/2019/5/20/16ad47e3b44a0435?w=318&h=205&f=jpeg&s=9994",
+          text: "按摩券长期有效"
+        },
+        {
+          type: "image",
+          content:
+            "https://user-gold-cdn.xitu.io/2019/5/20/16ad481782a90783?w=255&h=255&f=jpeg&s=9582",
+          text: "一张听话卡"
+        },
+        { type: "text", content: "一起做饭吧" }
+      ],
+
+      finish: function(index) {
+        switch (this.awards[index].type) {
+          case "text":
+            alert("🎉恭喜您中得：" + this.awards[index].content);
+            break;
+          case "image":
+            alert("🎉恭喜您中得：" + this.awards[index].text);
+            break;
+          case "losing":
+            alert("💔神秘大礼包敬请期待哟~");
+            break;
+        }
+      }
+    });
+    luckDraw.render(canvas, context);
+
+    console.log(luckDraw.SUDOKU_ITEM_SIZE);
+    console.log(luckDraw);
+  </script>
+</html>
