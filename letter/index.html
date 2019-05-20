@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>演示：使用HTML5实现刮刮卡效果</title>
+    <style type="text/css">
+      .demo {
+        width: 320px;
+        margin: 10px auto 20px auto;
+        min-height: 300px;
+      }
+      .msg {
+        text-align: center;
+        height: 32px;
+        line-height: 32px;
+        font-weight: bold;
+        margin-top: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <div class="msg">
+        摸摸自己看看什么效果哈哈哈，<a href="javascript:void(0)" id="try_again"
+          >再来一次</a
+        >
+      </div>
+      <div class="demo">
+        <canvas id="canvas"></canvas>
+      </div>
+    </div>
+    <script src="./scrapAward-dev.js"></script>
+    <script>
+      let scraAward = new ScrapAward({
+        height: 570,
+        coverImage: {
+          url:
+            "https://user-gold-cdn.xitu.io/2019/5/9/16a9b8578302943c?w=1080&h=1440&f=jpeg&s=92936",
+          // width: 320,
+          // height: 426,
+          width: 428,
+          height: 570
+        }
+      });
+      document
+        .getElementById("try_again")
+        .addEventListener("click", function(e) {
+          scraAward.init({});
+          return;
+          var imgs = [
+            "https://zxpsuper.github.io/Demo/guajiang/p_1.jpg",
+            "https://zxpsuper.github.io/Demo/guajiang/p_0.jpg"
+          ];
+          var num = Math.floor(Math.random() * 2);
+          scraAward.init({
+            backgroundImageUrl: imgs[num]
+          });
+        });
+    </script>
+  </body>
+</html>
