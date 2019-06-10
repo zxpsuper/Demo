@@ -1487,6 +1487,7 @@ var QRCode;
         };
 
         if (typeof vOption === 'string') {
+            // 如果 option 是字符串，就默认为text文本
             vOption = {
                 text: vOption,
             };
