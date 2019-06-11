@@ -1,0 +1,53 @@
+{
+    "user": [
+        {
+            "name": "首页",
+            "child": [
+                { "name": "JavaScript" },
+                { "name": "Html" },
+                { "name": "Css" }
+            ]
+        },
+        {
+            "name": "前端",
+            "child": [
+                { "name": "JavaScript" },
+                { "name": "Html" },
+                { "name": "Css" }
+            ]
+        },
+        {
+            "name": "后端",
+            "child": [
+                { "name": "Python" },
+                { "name": "Java" },
+                { "name": "Go" }
+            ]
+        },
+        {
+            "name": "财会金融",
+            "child": [
+                { "name": "初级会计" },
+                { "name": "中级会计" },
+                { "name": "注册会计(CPA)" },
+                { "name": "特许金融分析师(CFA)" }
+            ]
+        },
+        {
+            "name": "案例及总结",
+            "child": [
+                { "name": "前端案例总结" },
+                { "name": "后端案例总结" },
+                { "name": "财会金融案例" }
+            ]
+        },
+        {
+            "name": "其他",
+            "child": [
+                { "name": "JavaScript" },
+                { "name": "Html" },
+                { "name": "Css" }
+            ]
+        }
+    ]
+}
