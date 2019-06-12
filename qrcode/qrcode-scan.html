@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      @media screen and (min-width: 1024px) {
+        .body {
+          width: 1200px;
+          margin: 0 auto;
+        }
+      }
+      #outdiv {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+      }
+      #qr-canvas {
+        display: none;
+      }
+      #scancode-mask {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .scancode-tips-group {
+        position: fixed;
+        width: 300px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 200;
+        color: #fff;
+        font-size: 16px;
+        text-align: center;
+      }
+      .tips {
+        color: rgba(255, 255, 255, 0.4);
+      }
+      .upload-my-code {
+        color: green;
+        margin-top: 10px;
+      }
+      #v {
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="body">
+      <div id="mainbody" style="display: inline;">
+        <div id="outdiv" autoplay muted></div>
+      </div>
+      <canvas id="qr-canvas" width="800" height="600"></canvas>
+      <canvas id="scancode-mask"></canvas>
+      <div class="scancode-tips-group" id="scancode-tips-group">
+        <span class="tips">將QR Code 放入框内，即可自動掃描</span>
+        <div class="upload-my-code" onClick="setimg()">我的QR Code</div>
+      </div>
+
+      <div id="img-upload-container" style="display: none">
+        <div id="qrfile">
+          <canvas id="out-canvas" width="320" height="240"></canvas>
+          <div id="imghelp">
+            drag and drop a QRCode here
+            <br />or select a file
+            <input
+              type="file"
+              onchange="handleFiles(this.files)"
+              id="upload-img"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./llqrcode.js"></script>
+    <script src="./variable.js"></script>
+    <script src="./methods.js"></script>
+    <script>
+      qrcodeScanLoad(320, 400);
+      setMask();
+      if (document.body.clientWidth < 1025) {
+        document.getElementById("scancode-tips-group").style.top =
+          (document.body.clientHeight - document.body.clientWidth) / 2 +
+          document.body.clientWidth * 0.9 -
+          10 +
+          "px";
+      } else {
+        document.getElementById("scancode-tips-group").style.top = "720px";
+      }
+    </script>
+  </body>
+</html>
