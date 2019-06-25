@@ -1196,6 +1196,7 @@ var QRCode;
         : (function() {
               // Drawing in Canvas
               function _onMakeImage() {
+                  this._elImage.id = 'qrcode-image';
                   this._elImage.src = this._elCanvas.toDataURL('image/png');
                   this._elImage.style.display = 'block';
                   this._elCanvas.style.display = 'none';
@@ -1350,7 +1351,7 @@ var QRCode;
                           );
                       }
                   }
-
+                  
                   this._bIsPainted = true;
               };
 

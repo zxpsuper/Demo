@@ -68,8 +68,11 @@
       />
       <button onclick="creatQRcode();">一键生成</button>
       <div id="qrcode"></div>
+
+      <a href="javascript:void(0);" onclick="downloads();">点击下载</a>
     </div>
-    <script src="https://zxpsuper.github.io/Demo/qrcode/qrcode-dev.js"></script>
+    <!-- <script src="https://zxpsuper.github.io/Demo/qrcode/qrcode-dev.js"></script> -->
+    <script src="./qrcode-dev.js"></script>
     <script type="text/javascript">
       var qrcode = null;
       function creatQRcode() {
@@ -82,6 +85,40 @@
           colorLight: "#ffffff",
           correctLevel: QRCode.CorrectLevel.H
         });
+      }
+
+      function downloads() {
+        console.log(document.getElementById("qrcode-image").src);
+        let data = document.getElementById("qrcode-image").src;
+        let aLink = document.createElement("a");
+        let blob = base64ToBlob(data); //new Blob([content]);
+
+        let evt = document.createEvent("HTMLEvents");
+        evt.initEvent("click", true, true); //initEvent 不加后两个参数在FF下会报错  事件类型，是否冒泡，是否阻止浏览器的默认行为
+        aLink.download = "fileName";
+        aLink.href = URL.createObjectURL(blob);
+
+        aLink.dispatchEvent(
+          new MouseEvent("click", {
+            bubbles: true,
+            cancelable: true,
+            view: window
+          })
+        ); //兼容火狐
+      }
+      //base64转blob
+      function base64ToBlob(code) {
+        let parts = code.split(";base64,");
+        let contentType = parts[0].split(":")[1];
+        let raw = window.atob(parts[1]);
+        let rawLength = raw.length;
+
+        let uInt8Array = new Uint8Array(rawLength);
+
+        for (let i = 0; i < rawLength; ++i) {
+          uInt8Array[i] = raw.charCodeAt(i);
+        }
+        return new Blob([uInt8Array], { type: contentType });
       }
     </script>
   </body>
