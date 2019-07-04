@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>draggable</title>
+    <style>
+      body {
+        background-color: darksalmon;
+      }
+
+      .draggable {
+        background-image: url("https://avatars1.githubusercontent.com/u/28730619?s=460&v=4");
+        background-size: contain;
+        position: relative;
+        height: 150px;
+        width: 150px;
+        top: 5px;
+        left: 5px;
+        cursor: pointer;
+      }
+
+      .droppable {
+        display: inline-block;
+        height: 160px;
+        width: 160px;
+        margin: 10px;
+        border: 3px salmon solid;
+        background-color: white;
+      }
+
+      .dragging {
+        border: 4px yellow solid;
+      }
+
+      .drag-over {
+        background-color: #f4f4f4;
+        border-style: dashed;
+      }
+
+      .invisible {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="droppable">
+      <div class="draggable" draggable="true"></div>
+    </div>
+    <div class="droppable"></div>
+    <div class="droppable"></div>
+    <div class="droppable"></div>
+    <div class="droppable"></div>
+    <script>
+      // 查询draggable和droppable
+      const draggable = document.querySelector(".draggable");
+      const droppables = document.querySelectorAll(".droppable");
+
+      // 监听draggable的相关事件
+      draggable.addEventListener("dragstart", dragStart);
+      draggable.addEventListener("dragend", dragEnd);
+
+      function dragStart() {
+        this.className += " dragging";
+        setTimeout(() => {
+          this.className = "invisible";
+        }, 0);
+      }
+
+      function dragEnd() {
+        this.className = "draggable";
+      }
+
+      // 监听droppable的相关事件
+      for (const droppable of droppables) {
+        droppable.addEventListener("dragover", dragOver);
+        droppable.addEventListener("dragleave", dragLeave);
+        droppable.addEventListener("dragenter", dragEnter);
+        droppable.addEventListener("drop", dragDrop);
+      }
+
+      function dragOver(e) {
+        e.preventDefault();
+      }
+
+      function dragEnter(e) {
+        e.preventDefault();
+        this.className += " drag-over";
+      }
+
+      function dragLeave(e) {
+        this.className = "droppable";
+      }
+
+      function dragDrop(e) {
+        this.className = "droppable";
+        this.append(draggable);
+      }
+    </script>
+  </body>
+</html>
