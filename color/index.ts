@@ -2,7 +2,7 @@
  * @Author: super
  * @Date: 2019-06-27 16:29:31
  * @Last Modified by: super
- * @Last Modified time: 2019-07-08 11:28:32
+ * @Last Modified time: 2019-07-08 11:39:34
  */
 import { addEvent, extend, windowToCanvas } from "./utils";
 import { getColor } from "./gameMethods";
@@ -10,12 +10,13 @@ import { Context } from "vm";
 interface ColorGameType {
   init: Function;
   nextStep: Function;
+  reStart: Function;
 }
 interface BaseOptions {
-  time: number;
-  end: Function;
-  start: Function;
-  canvas: HTMLCanvasElement;
+  time?: number;
+  end?: Function;
+  start?: Function;
+  canvas?: HTMLCanvasElement;
 }
 // 坐标
 interface Coordinate {
