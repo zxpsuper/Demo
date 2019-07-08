@@ -4,10 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="index.css" />
-    <title>suporka color game</title>
+    <title>QRcode-with-logo</title>
+    <link
+      rel="stylesheet"
+      href="https://zxpsuper.github.io/Demo/color/index.css"
+    />
   </head>
-
   <body>
     <div class="container">
       <div class="wgt-home" id="page-one">
@@ -21,7 +23,10 @@
 
       <aside class="wgt-score"></aside>
 
-      <section id="screen" class="screen"></section>
+      <section id="screen" class="screen">
+        <canvas id="canvas" width="600" height="600"></canvas>
+      </section>
+      <section id="result"></section>
 
       <footer>
         <div>
@@ -36,27 +41,25 @@
         ©<a href="https://github.com/zxpsuper">My Github</a>
       </footer>
     </div>
-  </body>
-  <!-- <script src="index.js"></script> -->
-  <script src="index.js"></script>
-  <script>
-    // 事件兼容方法，兼容ie
-    function addEvent(element, type, handler) {
-      if (element.addEventListener) {
-        element.addEventListener(type, handler, false);
-      } else if (element.attachEvent) {
-        element.attachEvent("on" + type, handler);
-      } else {
-        element["on" + type] = handler;
+    <script src="./ColorGame2.js"></script>
+    <script>
+      function addEvent(element, type, handler) {
+        if (element.addEventListener) {
+          element.addEventListener(type, handler, false);
+        } else if (element.attachEvent) {
+          element.attachEvent("on" + type, handler);
+        } else {
+          element["on" + type] = handler;
+        }
       }
-    }
-    window.onload = function() {
-      addEvent(document.querySelector("#start"), "click", function() {
-        document.querySelector("#page-one").style.display = "none";
-        new ColorGame({
-          time: 30
+      window.onload = function() {
+        addEvent(document.querySelector("#start"), "click", function() {
+          document.querySelector("#page-one").style.display = "none";
+          new ColorGame({
+            time: 30
+          });
         });
-      });
-    };
-  </script>
+      };
+    </script>
+  </body>
 </html>

@@ -88,8 +88,7 @@ class ColorGame {
 // 合并参数方法
 function extend(o, n, override) {
   for (var p in n) {
-    if (n.hasOwnProperty(p) && (!o.hasOwnProperty(p) || override))
-      o[p] = n[p];
+    if (n.hasOwnProperty(p) && (!o.hasOwnProperty(p) || override)) o[p] = n[p];
   }
 }
 /**
@@ -97,10 +96,13 @@ function extend(o, n, override) {
  * @param {number} step 关卡
  */
 function getColor(step) {
-  let random = Math.floor(100/step);
+  let random = Math.floor(100 / step);
   // let random = Math.floor(Math.abs(100 - 4 * step));
   let color = randomColor(17, 255),
     m = color.match(/[\da-z]{2}/g);
+  console.log("m", m);
+  console.log(typeof m[0]);
+  console.log("color", color);
   for (let i = 0; i < m.length; i++) m[i] = parseInt(m[i], 16); //rgb
   let specialColor =
     getRandomColorNumber(m[0], random) +
