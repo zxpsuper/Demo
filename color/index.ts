@@ -2,7 +2,7 @@
  * @Author: super
  * @Date: 2019-06-27 16:29:31
  * @Last Modified by: super
- * @Last Modified time: 2019-07-08 11:39:34
+ * @Last Modified time: 2019-07-10 10:20:00
  */
 import { addEvent, extend, windowToCanvas } from "./utils";
 import { getColor } from "./gameMethods";
@@ -24,13 +24,14 @@ interface Coordinate {
   y: number;
 }
 class ColorGame implements ColorGameType {
-  option: BaseOptions;
-  step: number; // 步
-  score: number; // 得分
-  time: number;
-  blockWidth: number; // 盒子宽度
-  randomBlock: number; // 随机盒子索引
-  positionArray: Array<Coordinate>;
+  private option: BaseOptions;
+  private step: number; // 步
+  private score: number; // 得分
+  private time: number;
+  private blockWidth: number; // 盒子宽度
+  private randomBlock: number; // 随机盒子索引
+  private positionArray: Array<Coordinate>;
+  private widthScale: number; // 实虚宽度比
   constructor(userOption: BaseOptions) {
     this.option = {
       time: 30, // 总时长
@@ -58,6 +59,7 @@ class ColorGame implements ColorGameType {
     if (this.option.start) this.option.start();
     this.step = 0;
     this.score = 0;
+
     if (userOption) {
       if (Object.assign) {
         Object.assign(this.option, userOption);
@@ -67,6 +69,9 @@ class ColorGame implements ColorGameType {
     }
     // 倒计时赋值
     this.time = this.option.time;
+    this.widthScale =
+      this.option.canvas.width /
+      this.option.canvas.getBoundingClientRect().width;
     // 设置初始时间和分数
     document.getElementsByClassName(
       "wgt-score"
@@ -87,7 +92,11 @@ class ColorGame implements ColorGameType {
     ["mousedown", "touchstart"].forEach(event => {
       this.option.canvas.addEventListener(event, e => {
         let loc = windowToCanvas(this.option.canvas, e);
-        if (this.option.canvas.getContext("2d").isPointInPath(loc.x, loc.y)) {
+        if (
+          this.option.canvas
+            .getContext("2d")
+            .isPointInPath(loc.x * this.widthScale, loc.y * this.widthScale)
+        ) {
           this.nextStep();
           this.score++;
           document.getElementById("score").innerHTML = this.score.toString();
@@ -96,7 +105,6 @@ class ColorGame implements ColorGameType {
     });
   }
   nextStep() {
-    console.log(this);
     // 记级
     this.step++;
     let col: number; // 列数
@@ -115,7 +123,7 @@ class ColorGame implements ColorGameType {
     ctx.clearRect(0, 0, canvas.width, canvas.width); // 清除画布
     ctx.closePath();
     // 小盒子宽度
-    this.blockWidth = (canvas.width - (col - 1) * 2) / col;
+    this.blockWidth = (canvas.width - (col - 1) * 2 * this.widthScale) / col;
     // 随机盒子index
     this.randomBlock = Math.floor(col * col * Math.random());
     // 解构赋值获取一般颜色和特殊颜色
@@ -146,14 +154,6 @@ class ColorGame implements ColorGameType {
       this.blockWidth
     );
     ctx.closePath();
-    // ctx.restore();
-
-    // // 监听特殊盒子点击事件
-    // addEvent(document.getElementById("special-block"), "click", () => {
-    //   this.nextStep();
-    //   this.score++;
-    //   document.getElementById("score").innerHTML = this.score.toString();
-    // });
   }
   reStart() {
     console.log("重新开始");

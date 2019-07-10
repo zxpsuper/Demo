@@ -2,7 +2,7 @@
  * @Author: super
  * @Date: 2019-06-27 16:29:43
  * @Last Modified by: super
- * @Last Modified time: 2019-07-08 10:43:07
+ * @Last Modified time: 2019-07-10 10:03:25
  */
 
 /**
@@ -23,22 +23,6 @@ export const promisify = (f: Function): Function => {
     });
   };
 };
-/**
- * 判斷是否是函數
- * Determine if it is a function
- * @param o {function} 函數
- */
-export function isFunction(o: any): boolean {
-  return typeof o === "function";
-}
-/**
- * 判斷是不是字符串
- * Determine if it is a string
- * @param o {string} 字符串
- */
-export function isString(o: any): boolean {
-  return typeof o === "string";
-}
 
 /**
  * 判斷是不是 image dom 節點
@@ -80,10 +64,23 @@ export function addEvent(element: HTMLElement, type: string, handler: any) {
   }
 }
 
+/**
+ * 获取点击点于canvas内的坐标
+ * @param canvas canvas对象
+ * @param e 点击事件
+ */
 export function windowToCanvas(canvas: HTMLCanvasElement, e: any) {
   let bbox = canvas.getBoundingClientRect(),
-    x = IsPC() ? e.clientX || e.clientX : e.changedTouches[0].clientX,
-    y = IsPC() ? e.clientY || e.clientY : e.changedTouches[0].clientY;
+    x = IsPC()
+      ? e.clientX
+      : e.changedTouches
+      ? e.changedTouches[0].clientX
+      : e.clientX,
+    y = IsPC()
+      ? e.clientY
+      : e.changedTouches
+      ? e.changedTouches[0].clientY
+      : e.clientY;
 
   return {
     x: x - bbox.left,
@@ -94,7 +91,7 @@ export function windowToCanvas(canvas: HTMLCanvasElement, e: any) {
 /**
  * 判断是否为 PC 端，若是则返回 true，否则返回 flase
  */
-export function IsPC() {
+export function IsPC(): boolean {
   let userAgentInfo = navigator.userAgent,
     flag = true,
     Agents = [
@@ -113,4 +110,48 @@ export function IsPC() {
     }
   }
   return flag;
+}
+
+/**
+ * 判断是否为数组
+ * @param obj 任意对象变量
+ */
+export function isArray(obj: any): boolean {
+  return Object.prototype.toString.call(obj) === "[object Array]";
+}
+
+/**
+ * 判断一个东西是否存在于数组内
+ * @param arr 数组
+ * @param item 子项
+ */
+export function isInArray(arr: Array<any>, item: any): boolean {
+  for (var i = arr.length; --i > -1; ) {
+    if (item === arr[i]) return true;
+  }
+  return false;
+}
+
+/**
+ * 判斷是否是函數
+ * Determine if it is a function
+ * @param o {function} 函數
+ */
+export function isFunction(o: any): boolean {
+  return typeof o === "function";
+}
+/**
+ * 判斷是不是字符串
+ * Determine if it is a string
+ * @param o {string} 字符串
+ */
+export function isString(o: any): boolean {
+  return typeof o === "string";
+}
+
+export function _getRootName(prop: string, path: string): string {
+  if (path === "#") {
+    return prop;
+  }
+  return path.split("-")[1];
 }
