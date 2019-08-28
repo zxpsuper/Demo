@@ -4,6 +4,34 @@
 
 ### **个人小项目展示及源码小仓库。**
 
+15. **Typescript 手写辨色小游戏**
+
+- [Canvas 进阶（三）ts + canvas 重写”辨色“小游戏](https://juejin.im/post/5d22af2b6fb9a07ea7133361)
+- [源码](https://github.com/zxpsuper/Demo/tree/master/color)+[Demo](https://zxpsuper.github.io/Demo/color/colorTs.html)
+
+---
+
+15. **写一个生成带 logo 的二维码 npm 插件**
+
+- [Canvas 进阶（二）写一个生成带 logo 的二维码 npm 插件](https://juejin.im/post/5d1c461f6fb9a07f070e4768)
+- [源码](https://github.com/zxpsuper/qrcode-with-logos)+[Demo](https://zxpsuper.github.io/qrcode-with-logos/dist/)
+
+---
+
+14. **二维码的扫码识别**
+
+- [Canvas 进阶（一）二维码的生成与扫码识别](https://juejin.im/post/5d00b3626fb9a07ed74076a9)
+- [源码](https://github.com/zxpsuper/Demo/tree/master/qrcode)+[Demo](https://zxpsuper.github.io/Demo/qrcode/qrcode-scan.html)
+
+---
+
+13. **二维码的生成**
+
+- [Canvas 进阶（一）二维码的生成与扫码识别](https://juejin.im/post/5d00b3626fb9a07ed74076a9)
+- [源码](https://github.com/zxpsuper/Demo/blob/master/qrcode/index.html)+[Demo](https://zxpsuper.github.io/Demo/qrcode/)
+
+---
+
 12. **小皮咖导航**
 
 - [源码](https://github.com/zxpsuper/Demo/tree/master/navigation)+[Demo](https://zxpsuper.github.io/Demo/navigation/)
