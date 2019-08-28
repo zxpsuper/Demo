@@ -4,7 +4,7 @@
 
 ### **个人小项目展示及源码小仓库。**
 
-15. **Typescript 手写辨色小游戏**
+16. **Typescript 手写辨色小游戏**
 
 - [Canvas 进阶（三）ts + canvas 重写”辨色“小游戏](https://juejin.im/post/5d22af2b6fb9a07ea7133361)
 - [源码](https://github.com/zxpsuper/Demo/tree/master/color)+[Demo](https://zxpsuper.github.io/Demo/color/colorTs.html)
