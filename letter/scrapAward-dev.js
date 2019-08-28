@@ -44,7 +44,7 @@ class ScrapAward {
 
         that.mousedown = false;
 
-        // 事件监听
+        // 事件监听移除
         if (this.canvas) {
             this.canvas.removeEventListener(tapstart, eventDown.bind(this));
             this.canvas.removeEventListener(tapend, eventUp.bind(this));
