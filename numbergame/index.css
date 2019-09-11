@@ -1,0 +1,174 @@
+.content {
+  width: 89vw;
+  height: 89vw;
+  background-color: #fff;
+  margin: 0 auto;
+  position: relative;
+  border: 1px solid #00aac5
+}
+.content div {
+  background-color: #c02c38;
+  width: 17vw;
+  height: 17vw;
+  line-height: 17vw;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  color: #fff;
+  box-shadow: 0 0 8px 0 #ccc;
+  border-radius: 8px;
+  transition: all 0.5s;
+}
+.game-item-1 {
+  position: absolute;
+  top: 0;
+  left: 0
+}
+.game-item-2 {
+  position: absolute;
+  top: 0;
+  left: 18vw;
+}
+
+.game-item-3 {
+  position: absolute;
+  top: 0;
+  left: 36vw;
+}
+
+.game-item-4 {
+  position: absolute;
+  top: 0;
+  left: 54vw;
+}
+.game-item-5 {
+  position: absolute;
+  top: 0;
+  left: 72vw;
+}
+
+.game-item-5 {
+  position: absolute;
+  top: 0;
+  left: 72vw;
+}
+
+.game-item-6 {
+  position: absolute;
+  top: 18vw;
+  left: 0vw;
+}
+
+.game-item-7 {
+  position: absolute;
+  top: 18vw;
+  left: 18vw;
+}
+
+.game-item-8 {
+  position: absolute;
+  top: 18vw;
+  left: 36vw;
+}
+
+.game-item-9 {
+  position: absolute;
+  top: 18vw;
+  left: 54vw;
+}
+
+.game-item-10 {
+  position: absolute;
+  top: 18vw;
+  left: 72vw;
+}
+
+.game-item-11 {
+  position: absolute;
+  top: 36vw;
+  left: 0vw;
+}
+
+.game-item-12 {
+  position: absolute;
+  top: 36vw;
+  left: 18vw;
+}
+
+.game-item-13 {
+  position: absolute;
+  top: 36vw;
+  left: 36vw;
+}
+
+.game-item-14 {
+  position: absolute;
+  top: 36vw;
+  left: 54vw;
+}
+
+.game-item-15 {
+  position: absolute;
+  top: 36vw;
+  left: 72vw;
+}
+
+.game-item-16 {
+  position: absolute;
+  top: 54vw;
+  left: 0vw;
+}
+
+.game-item-17 {
+  position: absolute;
+  top: 54vw;
+  left: 18vw;
+}
+
+.game-item-18 {
+  position: absolute;
+  top: 54vw;
+  left: 36vw;
+}
+
+.game-item-19 {
+  position: absolute;
+  top: 54vw;
+  left: 54vw;
+}
+
+.game-item-20 {
+  position: absolute;
+  top: 54vw;
+  left: 72vw;
+}
+
+.game-item-21 {
+  position: absolute;
+  top: 72vw;
+  left: 0vw;
+}
+
+.game-item-22 {
+  position: absolute;
+  top: 72vw;
+  left: 18vw;
+}
+
+.game-item-23 {
+  position: absolute;
+  top: 72vw;
+  left: 36vw;
+}
+
+.game-item-24 {
+  position: absolute;
+  top: 72vw;
+  left: 54vw;
+}
+
+.game-item-25 {
+  position: absolute;
+  top: 72vw;
+  left: 72vw;
+}
