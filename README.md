@@ -4,7 +4,7 @@
 
 ### **个人小项目展示及源码小仓库。**
 
-17. **实现一个“刮刮乐”游戏**
+18. **实现一个“刮刮乐”游戏**
 
 -   拼图小游戏（将 1-9 按顺序排在中间位置即可）
 -   [源码](https://github.com/zxpsuper/Demo/blob/master/numbergame/index.js)+[Demo](https://zxpsuper.github.io/Demo/numbergame/)
