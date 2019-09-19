@@ -3,13 +3,15 @@ class Game {
         this.option = {
             end: () => {},
         };
-        this.second = 0;
-        this.finished = false;
+
         this.hasInit = false;
         // this.init();
         this.addEventListener();
     }
     init() {
+        document.querySelector(`.content`).innerHTML = '';
+        this.second = 0;
+        this.finished = false;
         let historyTime = window.localStorage.getItem('historyTime');
         if (historyTime) {
             document.getElementById('history').innerHTML = historyTime;
