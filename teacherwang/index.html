@@ -25,14 +25,7 @@
     </style>
   </head>
   <body>
-      <audio
-      src="./happy_birthday2.mp3"
-      autoplay
-      loop
-      style="display: none;"
-    >
-      您的浏览器不支持 audio 标签。
-    </audio>
+      
     <canvas id="cas" style="background-color:rgba(0,5,24,1)"
       >浏览器不支持canvas</canvas
     >
@@ -66,7 +59,9 @@
       ocas.height = canvas.height = window.innerHeight;
       var bigbooms = [];
 
-      initAnimate();
+      window.onload = function() {
+        initAnimate();
+      };
 
       // canvas初始化
       function initAnimate() {
@@ -464,6 +459,13 @@
         return Number(textIndex);
       }
     </script>
-        
+    <audio
+    src="./happy_birthday2.mp3"
+    autoplay
+    loop
+    style="display: none;"
+  >
+    您的浏览器不支持 audio 标签。
+  </audio>    
   </body>
 </html>
