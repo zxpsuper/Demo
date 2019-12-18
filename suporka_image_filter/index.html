@@ -1,440 +1,372 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="http://unpkg.com/view-design/dist/styles/iview.css"
-    />
-    <link rel="stylesheet" href="./index.css" />
-    <script
-      type="text/javascript"
-      src="http://vuejs.org/js/vue.min.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="http://unpkg.com/view-design/dist/iview.min.js"
-    ></script>
-    <title>图像算法</title>
-  </head>
-  <body>
-    <a
-      class="github-fork-ribbon right-top"
-      href="https://github.com/zxpsuper/Demo"
-      title="Fork me on GitHub"
-      >Fork me on GitHub</a
-    >
-    <div id="app">
-      <div class="text-center">
-        <h1>小皮咖图像滤镜</h1>
-        <img
-          src="https://avatars.githubusercontent.com/u/28730619?s=460&v=4"
-          alt=""
-          class="avatar"
-          id="avatar"
-        />
-        <div>
-          <i-select
-            v-model="pictureMode"
-            style="width:200px"
-            placeholder="请选择图像模式"
-            @on-change="selectMode"
-          >
-            <i-option
-              v-for="item in selectList"
-              :value="item.value"
-              :key="item.value"
-              >{{ item.label }}</i-option
-            >
-          </i-select>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/view-design/dist/styles/iview.css" />
+        <link rel="stylesheet" href="./index.css" />
+        <script type="text/javascript" src="https://vuejs.org/js/vue.min.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/view-design/dist/iview.min.js"></script>
+        <title>图像算法</title>
+    </head>
+    <body>
+        <a class="github-fork-ribbon right-top" href="https://github.com/zxpsuper/Demo" title="Fork me on GitHub"
+            >Fork me on GitHub</a
+        >
+        <div id="app">
+            <div class="text-center">
+                <h1>小皮咖图像滤镜</h1>
+                <img
+                    src="https://avatars.githubusercontent.com/u/28730619?s=460&v=4"
+                    alt=""
+                    class="avatar"
+                    id="avatar"
+                />
+                <div>
+                    <i-select
+                        v-model="pictureMode"
+                        style="width:200px"
+                        placeholder="请选择图像模式"
+                        @on-change="selectMode"
+                    >
+                        <i-option v-for="item in selectList" :value="item.value" :key="item.value"
+                            >{{ item.label }}</i-option
+                        >
+                    </i-select>
+                </div>
+                <div style="margin: 24px 0">
+                    <i-button icon="ios-cloud-upload-outline" type="primary" @click="$refs.input.click()"
+                        >上传图片</i-button
+                    >
+                    <i-button icon="ios-cloud-download-outline" type="primary" @click="downloadImage"
+                        >下载图片</i-button
+                    >
+                    <input type="file" ref="input" @change="uploadImage" style="display: none;" />
+                </div>
+                <div>
+                    <!-- 用户原始图片 -->
+                    <canvas id="origin" :width="width" :height="height" v-show="image"></canvas>
+                    <!-- 目标图片 -->
+                    <canvas id="new" :width="width" :height="height" v-show="image"></canvas>
+                </div>
+            </div>
         </div>
-        <div style="margin: 24px 0">
-          <i-button
-            icon="ios-cloud-upload-outline"
-            type="primary"
-            @click="$refs.input.click()"
-            >上传图片</i-button
-          >
-          <i-button
-            icon="ios-cloud-download-outline"
-            type="primary"
-            @click="downloadImage"
-            >下载图片</i-button
-          >
-          <input
-            type="file"
-            ref="input"
-            @change="uploadImage"
-            style="display: none;"
-          />
-        </div>
-        <div>
-          <!-- 用户原始图片 -->
-          <canvas
-            id="origin"
-            :width="width"
-            :height="height"
-            v-show="image"
-          ></canvas>
-          <!-- 目标图片 -->
-          <canvas
-            id="new"
-            :width="width"
-            :height="height"
-            v-show="image"
-          ></canvas>
-        </div>
-      </div>
-    </div>
-    <script>
-      function handleEdge(i, x, w) {
-        var m = x + i;
-        if (m < 0) {
-          m = -m;
-        } else if (m >= w) {
-          m = w + i - x;
-        }
-        return m;
-      }
-      new Vue({
-        el: "#app",
-        data: {
-          visible: false,
-          selectList: [
-            {
-              label: "灰度滤镜",
-              value: "0"
-            },
-            {
-              label: "黑白滤镜",
-              value: "1"
-            },
-            {
-              label: "反向滤镜",
-              value: "2"
-            },
-            {
-              label: "去色滤镜",
-              value: "3"
-            },
-            {
-              label: "单色滤镜",
-              value: "4"
-            },
-            {
-              label: "高斯模糊滤镜",
-              value: "5"
-            },
-            {
-              label: "怀旧滤镜",
-              value: "6"
-            },
-            {
-              label: "熔铸滤镜",
-              value: "7"
-            },
-            {
-              label: "冰冻滤镜",
-              value: "8"
-            },
-            {
-              label: "连环画滤镜",
-              value: "9"
-            },
-            {
-              label: "褐色滤镜",
-              value: "10"
-            }
-          ],
-          pictureMode: "", // 图片滤镜模式
-          width: "", // canvas宽
-          height: "", // canvas高
-          image: null //
-        },
-        methods: {
-          // 选择不同模式
-          selectMode() {
-            if (!this.image) {
-              this.$Modal.error({
-                title: "错误",
-                content: "请上传图片先啦!!"
-              });
-              return;
-            }
-            // 为何延迟呢？若不延迟执行，下拉框会等待数据处理完成再收起，有明显的卡顿现象，尤其是高斯模糊滤镜
-            setTimeout(() => {
-              this.drawImage();
-            }, 17);
-          },
-
-          // 下载图片
-          downloadImage(image, name) {
-            if (!this.image) {
-              this.$Modal.error({
-                title: "错误",
-                content: "请上传图片先啦!!"
-              });
-              return;
-            }
-            var image = new Image();
-            var canvas = document.getElementById("new");
-            image.src = canvas.toDataURL();
-            this.downLoad(image, "suporka-image-filter.jpg");
-          },
-          // 下载
-          downLoad(image, name) {
-            const dataURL = image.src;
-            const link = document.createElement("a");
-            link.download = name;
-            link.href = dataURL;
-            link.dispatchEvent(new MouseEvent("click"));
-          },
-          // 上传图片
-          uploadImage(e) {
-            var that = this;
-            var file = e.target.files[0];
-            if (typeof FileReader === "undefined") {
-              alert("您的浏览器不支持图片上传，请升级您的浏览器");
-              return false;
-            }
-            var image = new Image();
-            image.crossOrigin = "Anonymous"; // 解决一些跨域问题
-            image.onload = function() {
-              that.width = image.width;
-              that.height = image.height;
-              that.image = image;
-              // 任务队列
-              setTimeout(() => {
-                that.drawOriginImage(image);
-              }, 0);
-            };
-
-            let reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = e => {
-              image.src = e.target.result;
-            };
-          },
-          // 画出原始图像
-          drawOriginImage(image) {
-            var canvasOrigin = document.getElementById("origin");
-            var ctxOrigin = canvasOrigin.getContext("2d");
-            var canvasNew = document.getElementById("new");
-            var ctxNew = canvasNew.getContext("2d");
-            ctxOrigin.drawImage(image, 0, 0, image.width, image.height);
-            ctxNew.drawImage(image, 0, 0, image.width, image.height);
-          },
-          // 画出目标图像
-          drawImage() {
-            var canvasOrigin = document.getElementById("origin");
-            var ctxOrigin = canvasOrigin.getContext("2d");
-            var canvasNew = document.getElementById("new");
-            var ctxNew = canvasNew.getContext("2d");
-            var imageData = ctxOrigin.getImageData(
-              0,
-              0,
-              this.width,
-              this.height
-            );
-            var data = imageData.data; // 获取原始图像每一个像素
-            this.chooseFilter(data, canvasNew, imageData);
-            ctxNew.putImageData(imageData, 0, 0);
-          },
-          // 根据不同的滤镜处理data
-          chooseFilter(data, canvas, imgData) {
-            if (this.pictureMode === "0") {
-              // 灰度
-              for (var i = 0; i < data.length; i += 4) {
-                var grey = (data[i] + data[i + 1] + data[i + 2]) / 3;
-                data[i] = data[i + 1] = data[i + 2] = grey;
-              }
-            } else if (this.pictureMode === "1") {
-              // 黑白滤镜
-              for (var i = 0; i < data.length; i += 4) {
-                var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
-                data[i] = data[i + 1] = data[i + 2] = avg >= 100 ? 255 : 0;
-              }
-            } else if (this.pictureMode === "2") {
-              // 反向滤镜
-              for (var i = 0; i < data.length; i += 4) {
-                data[i] = 255 - data[i];
-                data[i + 1] = 255 - data[i + 1];
-                data[i + 2] = 255 - data[i + 2];
-              }
-            } else if (this.pictureMode === "3") {
-              // 去色
-              for (var i = 0; i < data.length; i++) {
-                var avg = Math.floor(
-                  (Math.min(data[i], data[i + 1], data[i + 2]) +
-                    Math.max(data[i], data[i + 1], data[i + 2])) /
-                    2
-                );
-                data[i] = data[i + 1] = data[i + 2] = avg;
-              }
-            } else if (this.pictureMode === "4") {
-              // 单色滤镜
-              for (var i = 0; i < canvas.height * canvas.width; i++) {
-                data[i * 4 + 2] = 0;
-                data[i * 4 + 1] = 0;
-              }
-            } else if (this.pictureMode === "5") {
-              // 高斯模糊
-              try {
-                var pixes = imgData.data,
-                  height = imgData.height,
-                  width = imgData.width,
-                  radius = 5,
-                  sigma = radius / 3;
-
-                var gaussEdge = radius * 2 + 1;
-
-                var gaussMatrix = [],
-                  gaussSum = 0,
-                  a = 1 / (2 * sigma * sigma * Math.PI),
-                  b = -a * Math.PI;
-
-                for (var i = -radius; i <= radius; i++) {
-                  for (var j = -radius; j <= radius; j++) {
-                    var gxy = a * Math.exp((i * i + j * j) * b);
-                    gaussMatrix.push(gxy);
-                    gaussSum += gxy;
-                  }
+        <script>
+            function handleEdge(i, x, w) {
+                var m = x + i;
+                if (m < 0) {
+                    m = -m;
+                } else if (m >= w) {
+                    m = w + i - x;
                 }
-                var gaussNum = (radius + 1) * (radius + 1);
-                for (var i = 0; i < gaussNum; i++) {
-                  gaussMatrix[i] /= gaussSum;
-                }
-
-                for (var x = 0; x < width; x++) {
-                  for (var y = 0; y < height; y++) {
-                    var r = (g = b = 0);
-                    for (var i = -radius; i <= radius; i++) {
-                      var m = handleEdge(i, x, width);
-                      for (var j = -radius; j <= radius; j++) {
-                        var mm = handleEdge(j, y, height);
-                        var currentPixId = (mm * width + m) * 4;
-                        var jj = j + radius;
-                        var ii = i + radius;
-                        r +=
-                          pixes[currentPixId] *
-                          gaussMatrix[jj * gaussEdge + ii];
-                        g +=
-                          pixes[currentPixId + 1] *
-                          gaussMatrix[jj * gaussEdge + ii];
-                        b +=
-                          pixes[currentPixId + 2] *
-                          gaussMatrix[jj * gaussEdge + ii];
-                      }
-                    }
-                    var pixId = (y * width + x) * 4;
-
-                    pixes[pixId] = ~~r;
-                    pixes[pixId + 1] = ~~g;
-                    pixes[pixId + 2] = ~~b;
-                  }
-                }
-                imgData.data = pixes;
-              } catch (err) {
-                console.log(err);
-              }
-            } else if (this.pictureMode === "6") {
-              // 怀旧滤镜
-              for (var i = 0; i < imgData.height * imgData.width; i++) {
-                var r = imgData.data[i * 4],
-                  g = imgData.data[i * 4 + 1],
-                  b = imgData.data[i * 4 + 2];
-
-                var newR = 0.393 * r + 0.769 * g + 0.189 * b;
-                var newG = 0.349 * r + 0.686 * g + 0.168 * b;
-                var newB = 0.272 * r + 0.534 * g + 0.131 * b;
-                var rgbArr = [newR, newG, newB].map(e => {
-                  return e < 0 ? 0 : e > 255 ? 255 : e;
-                });
-                [
-                  imgData.data[i * 4],
-                  imgData.data[i * 4 + 1],
-                  imgData.data[i * 4 + 2]
-                ] = rgbArr;
-              }
-            } else if (this.pictureMode === "7") {
-              // 熔铸滤镜
-              for (var i = 0; i < imgData.height * imgData.width; i++) {
-                var r = imgData.data[i * 4],
-                  g = imgData.data[i * 4 + 1],
-                  b = imgData.data[i * 4 + 2];
-
-                var newR = (r * 128) / (g + b + 1);
-                var newG = (g * 128) / (r + b + 1);
-                var newB = (b * 128) / (g + r + 1);
-                var rgbArr = [newR, newG, newB].map(e => {
-                  return e < 0 ? 0 : e > 255 ? 255 : e;
-                });
-                [
-                  imgData.data[i * 4],
-                  imgData.data[i * 4 + 1],
-                  imgData.data[i * 4 + 2]
-                ] = rgbArr;
-              }
-            } else if (this.pictureMode === "8") {
-              // 冰冻滤镜
-              for (var i = 0; i < imgData.height * imgData.width; i++) {
-                var r = imgData.data[i * 4],
-                  g = imgData.data[i * 4 + 1],
-                  b = imgData.data[i * 4 + 2];
-
-                var newR = ((r - g - b) * 3) / 2;
-                var newG = ((g - r - b) * 3) / 2;
-                var newB = ((b - g - r) * 3) / 2;
-                var rgbArr = [newR, newG, newB].map(e => {
-                  return e < 0 ? 0 : e > 255 ? 255 : e;
-                });
-                [
-                  imgData.data[i * 4],
-                  imgData.data[i * 4 + 1],
-                  imgData.data[i * 4 + 2]
-                ] = rgbArr;
-              }
-            } else if (this.pictureMode === "9") {
-              // 连环画滤镜
-              for (var i = 0; i < imgData.height * imgData.width; i++) {
-                var r = imgData.data[i * 4],
-                  g = imgData.data[i * 4 + 1],
-                  b = imgData.data[i * 4 + 2];
-
-                var newR = (Math.abs(g - b + g + r) * r) / 256;
-                var newG = (Math.abs(b - g + b + r) * r) / 256;
-                var newB = (Math.abs(b - g + b + r) * g) / 256;
-                var rgbArr = [newR, newG, newB];
-                [
-                  imgData.data[i * 4],
-                  imgData.data[i * 4 + 1],
-                  imgData.data[i * 4 + 2]
-                ] = rgbArr;
-              }
-            } else if (this.pictureMode === "10") {
-              // 褐色滤镜
-              for (var i = 0; i < imgData.height * imgData.width; i++) {
-                var r = imgData.data[i * 4],
-                  g = imgData.data[i * 4 + 1],
-                  b = imgData.data[i * 4 + 2];
-
-                var newR = r * 0.393 + g * 0.769 + b * 0.189;
-                var newG = r * 0.349 + g * 0.686 + b * 0.168;
-                var newB = r * 0.272 + g * 0.534 + b * 0.131;
-                var rgbArr = [newR, newG, newB];
-                [
-                  imgData.data[i * 4],
-                  imgData.data[i * 4 + 1],
-                  imgData.data[i * 4 + 2]
-                ] = rgbArr;
-              }
+                return m;
             }
-          }
-        }
-      });
-    </script>
-  </body>
+            new Vue({
+                el: '#app',
+                data: {
+                    visible: false,
+                    selectList: [
+                        {
+                            label: '灰度滤镜',
+                            value: '0',
+                        },
+                        {
+                            label: '黑白滤镜',
+                            value: '1',
+                        },
+                        {
+                            label: '反向滤镜',
+                            value: '2',
+                        },
+                        {
+                            label: '去色滤镜',
+                            value: '3',
+                        },
+                        {
+                            label: '单色滤镜',
+                            value: '4',
+                        },
+                        {
+                            label: '高斯模糊滤镜',
+                            value: '5',
+                        },
+                        {
+                            label: '怀旧滤镜',
+                            value: '6',
+                        },
+                        {
+                            label: '熔铸滤镜',
+                            value: '7',
+                        },
+                        {
+                            label: '冰冻滤镜',
+                            value: '8',
+                        },
+                        {
+                            label: '连环画滤镜',
+                            value: '9',
+                        },
+                        {
+                            label: '褐色滤镜',
+                            value: '10',
+                        },
+                    ],
+                    pictureMode: '', // 图片滤镜模式
+                    width: '', // canvas宽
+                    height: '', // canvas高
+                    image: null, //
+                },
+                methods: {
+                    // 选择不同模式
+                    selectMode() {
+                        if (!this.image) {
+                            this.$Modal.error({
+                                title: '错误',
+                                content: '请上传图片先啦!!',
+                            });
+                            return;
+                        }
+                        // 为何延迟呢？若不延迟执行，下拉框会等待数据处理完成再收起，有明显的卡顿现象，尤其是高斯模糊滤镜
+                        setTimeout(() => {
+                            this.drawImage();
+                        }, 17);
+                    },
+
+                    // 下载图片
+                    downloadImage(image, name) {
+                        if (!this.image) {
+                            this.$Modal.error({
+                                title: '错误',
+                                content: '请上传图片先啦!!',
+                            });
+                            return;
+                        }
+                        var image = new Image();
+                        var canvas = document.getElementById('new');
+                        image.src = canvas.toDataURL();
+                        this.downLoad(image, 'suporka-image-filter.jpg');
+                    },
+                    // 下载
+                    downLoad(image, name) {
+                        const dataURL = image.src;
+                        const link = document.createElement('a');
+                        link.download = name;
+                        link.href = dataURL;
+                        link.dispatchEvent(new MouseEvent('click'));
+                    },
+                    // 上传图片
+                    uploadImage(e) {
+                        var that = this;
+                        var file = e.target.files[0];
+                        if (typeof FileReader === 'undefined') {
+                            alert('您的浏览器不支持图片上传，请升级您的浏览器');
+                            return false;
+                        }
+                        var image = new Image();
+                        image.crossOrigin = 'Anonymous'; // 解决一些跨域问题
+                        image.onload = function() {
+                            that.width = image.width;
+                            that.height = image.height;
+                            that.image = image;
+                            // 任务队列
+                            setTimeout(() => {
+                                that.drawOriginImage(image);
+                            }, 0);
+                        };
+
+                        let reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = e => {
+                            image.src = e.target.result;
+                        };
+                    },
+                    // 画出原始图像
+                    drawOriginImage(image) {
+                        var canvasOrigin = document.getElementById('origin');
+                        var ctxOrigin = canvasOrigin.getContext('2d');
+                        var canvasNew = document.getElementById('new');
+                        var ctxNew = canvasNew.getContext('2d');
+                        ctxOrigin.drawImage(image, 0, 0, image.width, image.height);
+                        ctxNew.drawImage(image, 0, 0, image.width, image.height);
+                    },
+                    // 画出目标图像
+                    drawImage() {
+                        var canvasOrigin = document.getElementById('origin');
+                        var ctxOrigin = canvasOrigin.getContext('2d');
+                        var canvasNew = document.getElementById('new');
+                        var ctxNew = canvasNew.getContext('2d');
+                        var imageData = ctxOrigin.getImageData(0, 0, this.width, this.height);
+                        var data = imageData.data; // 获取原始图像每一个像素
+                        this.chooseFilter(data, canvasNew, imageData);
+                        ctxNew.putImageData(imageData, 0, 0);
+                    },
+                    // 根据不同的滤镜处理data
+                    chooseFilter(data, canvas, imgData) {
+                        if (this.pictureMode === '0') {
+                            // 灰度
+                            for (var i = 0; i < data.length; i += 4) {
+                                var grey = (data[i] + data[i + 1] + data[i + 2]) / 3;
+                                data[i] = data[i + 1] = data[i + 2] = grey;
+                            }
+                        } else if (this.pictureMode === '1') {
+                            // 黑白滤镜
+                            for (var i = 0; i < data.length; i += 4) {
+                                var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+                                data[i] = data[i + 1] = data[i + 2] = avg >= 100 ? 255 : 0;
+                            }
+                        } else if (this.pictureMode === '2') {
+                            // 反向滤镜
+                            for (var i = 0; i < data.length; i += 4) {
+                                data[i] = 255 - data[i];
+                                data[i + 1] = 255 - data[i + 1];
+                                data[i + 2] = 255 - data[i + 2];
+                            }
+                        } else if (this.pictureMode === '3') {
+                            // 去色
+                            for (var i = 0; i < data.length; i++) {
+                                var avg = Math.floor(
+                                    (Math.min(data[i], data[i + 1], data[i + 2]) +
+                                        Math.max(data[i], data[i + 1], data[i + 2])) /
+                                        2
+                                );
+                                data[i] = data[i + 1] = data[i + 2] = avg;
+                            }
+                        } else if (this.pictureMode === '4') {
+                            // 单色滤镜
+                            for (var i = 0; i < canvas.height * canvas.width; i++) {
+                                data[i * 4 + 2] = 0;
+                                data[i * 4 + 1] = 0;
+                            }
+                        } else if (this.pictureMode === '5') {
+                            // 高斯模糊
+                            try {
+                                var pixes = imgData.data,
+                                    height = imgData.height,
+                                    width = imgData.width,
+                                    radius = 5,
+                                    sigma = radius / 3;
+
+                                var gaussEdge = radius * 2 + 1;
+
+                                var gaussMatrix = [],
+                                    gaussSum = 0,
+                                    a = 1 / (2 * sigma * sigma * Math.PI),
+                                    b = -a * Math.PI;
+
+                                for (var i = -radius; i <= radius; i++) {
+                                    for (var j = -radius; j <= radius; j++) {
+                                        var gxy = a * Math.exp((i * i + j * j) * b);
+                                        gaussMatrix.push(gxy);
+                                        gaussSum += gxy;
+                                    }
+                                }
+                                var gaussNum = (radius + 1) * (radius + 1);
+                                for (var i = 0; i < gaussNum; i++) {
+                                    gaussMatrix[i] /= gaussSum;
+                                }
+
+                                for (var x = 0; x < width; x++) {
+                                    for (var y = 0; y < height; y++) {
+                                        var r = (g = b = 0);
+                                        for (var i = -radius; i <= radius; i++) {
+                                            var m = handleEdge(i, x, width);
+                                            for (var j = -radius; j <= radius; j++) {
+                                                var mm = handleEdge(j, y, height);
+                                                var currentPixId = (mm * width + m) * 4;
+                                                var jj = j + radius;
+                                                var ii = i + radius;
+                                                r += pixes[currentPixId] * gaussMatrix[jj * gaussEdge + ii];
+                                                g += pixes[currentPixId + 1] * gaussMatrix[jj * gaussEdge + ii];
+                                                b += pixes[currentPixId + 2] * gaussMatrix[jj * gaussEdge + ii];
+                                            }
+                                        }
+                                        var pixId = (y * width + x) * 4;
+
+                                        pixes[pixId] = ~~r;
+                                        pixes[pixId + 1] = ~~g;
+                                        pixes[pixId + 2] = ~~b;
+                                    }
+                                }
+                                imgData.data = pixes;
+                            } catch (err) {
+                                console.log(err);
+                            }
+                        } else if (this.pictureMode === '6') {
+                            // 怀旧滤镜
+                            for (var i = 0; i < imgData.height * imgData.width; i++) {
+                                var r = imgData.data[i * 4],
+                                    g = imgData.data[i * 4 + 1],
+                                    b = imgData.data[i * 4 + 2];
+
+                                var newR = 0.393 * r + 0.769 * g + 0.189 * b;
+                                var newG = 0.349 * r + 0.686 * g + 0.168 * b;
+                                var newB = 0.272 * r + 0.534 * g + 0.131 * b;
+                                var rgbArr = [newR, newG, newB].map(e => {
+                                    return e < 0 ? 0 : e > 255 ? 255 : e;
+                                });
+                                [imgData.data[i * 4], imgData.data[i * 4 + 1], imgData.data[i * 4 + 2]] = rgbArr;
+                            }
+                        } else if (this.pictureMode === '7') {
+                            // 熔铸滤镜
+                            for (var i = 0; i < imgData.height * imgData.width; i++) {
+                                var r = imgData.data[i * 4],
+                                    g = imgData.data[i * 4 + 1],
+                                    b = imgData.data[i * 4 + 2];
+
+                                var newR = (r * 128) / (g + b + 1);
+                                var newG = (g * 128) / (r + b + 1);
+                                var newB = (b * 128) / (g + r + 1);
+                                var rgbArr = [newR, newG, newB].map(e => {
+                                    return e < 0 ? 0 : e > 255 ? 255 : e;
+                                });
+                                [imgData.data[i * 4], imgData.data[i * 4 + 1], imgData.data[i * 4 + 2]] = rgbArr;
+                            }
+                        } else if (this.pictureMode === '8') {
+                            // 冰冻滤镜
+                            for (var i = 0; i < imgData.height * imgData.width; i++) {
+                                var r = imgData.data[i * 4],
+                                    g = imgData.data[i * 4 + 1],
+                                    b = imgData.data[i * 4 + 2];
+
+                                var newR = ((r - g - b) * 3) / 2;
+                                var newG = ((g - r - b) * 3) / 2;
+                                var newB = ((b - g - r) * 3) / 2;
+                                var rgbArr = [newR, newG, newB].map(e => {
+                                    return e < 0 ? 0 : e > 255 ? 255 : e;
+                                });
+                                [imgData.data[i * 4], imgData.data[i * 4 + 1], imgData.data[i * 4 + 2]] = rgbArr;
+                            }
+                        } else if (this.pictureMode === '9') {
+                            // 连环画滤镜
+                            for (var i = 0; i < imgData.height * imgData.width; i++) {
+                                var r = imgData.data[i * 4],
+                                    g = imgData.data[i * 4 + 1],
+                                    b = imgData.data[i * 4 + 2];
+
+                                var newR = (Math.abs(g - b + g + r) * r) / 256;
+                                var newG = (Math.abs(b - g + b + r) * r) / 256;
+                                var newB = (Math.abs(b - g + b + r) * g) / 256;
+                                var rgbArr = [newR, newG, newB];
+                                [imgData.data[i * 4], imgData.data[i * 4 + 1], imgData.data[i * 4 + 2]] = rgbArr;
+                            }
+                        } else if (this.pictureMode === '10') {
+                            // 褐色滤镜
+                            for (var i = 0; i < imgData.height * imgData.width; i++) {
+                                var r = imgData.data[i * 4],
+                                    g = imgData.data[i * 4 + 1],
+                                    b = imgData.data[i * 4 + 2];
+
+                                var newR = r * 0.393 + g * 0.769 + b * 0.189;
+                                var newG = r * 0.349 + g * 0.686 + b * 0.168;
+                                var newB = r * 0.272 + g * 0.534 + b * 0.131;
+                                var rgbArr = [newR, newG, newB];
+                                [imgData.data[i * 4], imgData.data[i * 4 + 1], imgData.data[i * 4 + 2]] = rgbArr;
+                            }
+                        }
+                    },
+                },
+            });
+        </script>
+    </body>
 </html>
