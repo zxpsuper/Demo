@@ -145,6 +145,7 @@
                         var image = new Image();
                         var canvas = document.getElementById('new');
                         image.src = canvas.toDataURL();
+                        console.log(image)
                         this.downLoad(image, 'suporka-image-filter.jpg');
                     },
                     // 下载
@@ -166,13 +167,13 @@
                         var image = new Image();
                         image.crossOrigin = 'Anonymous'; // 解决一些跨域问题
                         image.onload = function() {
-                            that.width = image.width;
-                            that.height = image.height;
+                            that.width = image.width; // 设置canvas的宽
+                            that.height = image.height; // 设置canvas的高
                             that.image = image;
-                            // 任务队列
-                            setTimeout(() => {
+                            // 等待canvas的宽高属性渲染完毕绘制canvas
+                            that.$nextTick(() => { 
                                 that.drawOriginImage(image);
-                            }, 0);
+                            })
                         };
 
                         let reader = new FileReader();
