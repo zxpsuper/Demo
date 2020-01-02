@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/view-design/dist/styles/iview.css" />
+        <link rel="stylesheet" href="./index.css" />
+        <script type="text/javascript" src="https://vuejs.org/js/vue.min.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/view-design/dist/iview.min.js"></script>
+        <title>图像算法</title>
+    </head>
+    <body>
+        <a class="github-fork-ribbon right-top" href="https://github.com/zxpsuper/Demo" title="Fork me on GitHub"
+            >Fork me on GitHub</a
+        >
+        <div id="app">
+            <div class="text-center">
+                <h1>小皮咖身份验证</h1>
+                <i-select
+                        v-model="province"
+                        style="width:200px;text-align: left;"
+                        placeholder="请选择省份"
+                        @on-change="selectProvince"
+                    >
+                        <i-option v-for="(item, key, index) in provinceList" :value="key" :key="key"
+                            >{{ item}}</i-option
+                        >
+                </i-select>
+                <i-select
+                        v-model="city"
+                        style="width:200px;text-align: left;"
+                        placeholder="请选择城市"
+                        @on-change="selectCity"
+                    >
+                        <i-option v-for="(item, key, index) in citys" :value="key" :key="key"
+                            >{{ item }}</i-option
+                        >
+                </i-select>
+                <i-select
+                        v-model="county"
+                        style="width:200px;text-align: left;"
+                        placeholder="请选择城市"
+                        @on-change="selectCounty"
+                    >
+                        <i-option v-for="(item, key, index) in countys" :value="key" :key="key"
+                            >{{ item }}</i-option
+                        >
+                </i-select>
+            </div>
+        </div>
+        <script>
+            new Vue({
+                el: '#app',
+                data: {
+                    province: '',
+                    city: '',
+                    county: '',
+                    cityList: {},
+                    provinceList: {},
+                    countyList: {}
+                },
+                computed: {
+                  citys() {
+                    return this.cityList[this.province] || {}
+                  },
+                  countys() {
+                    return this.countyList[this.city] || {}
+                  }
+                },
+                created() {
+                    fetch('/city.json', {
+                        method: 'GET',
+                        mode: 'cors', // 允许发送跨域请求
+                        credentials: 'include',
+                    }).then(res => {
+                        res.json().then(result => {
+                          console.log(result);
+                          this.cityList = result
+                        })
+                        
+                    });
+                    fetch('/province.json', {
+                        method: 'GET',
+                        mode: 'cors', // 允许发送跨域请求
+                        credentials: 'include',
+                    }).then(res => {
+                        res.json().then(result => {
+                          console.log(result);
+                          this.provinceList = result
+                        })
+                        
+                    });
+                    fetch('/county.json', {
+                        method: 'GET',
+                        mode: 'cors', // 允许发送跨域请求
+                        credentials: 'include',
+                    }).then(res => {
+                        res.json().then(result => {
+                          console.log(result);
+                          this.countyList = result
+                        })
+                        
+                    });
+                },
+                methods: {
+                  selectProvince() {
+                    console.log(this.cityList)
+                    console.log(this.province)
+                  },
+                  selectCity () {
+                    console.log(this.city)
+                    console.log(this.province)
+                  },
+                  selectCounty () {}
+                }
+            });
+        </script>
+    </body>
+</html>
