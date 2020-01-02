@@ -4,6 +4,13 @@
 
 ### **个人小项目展示及源码小仓库。**
 
+19. **小皮咖图像滤镜**
+
+-   [Canvas 进阶（五）实现图片滤镜效果](https://juejin.im/post/5dfb15b96fb9a016164362b2)
+-   [源码](https://github.com/zxpsuper/Demo/blob/master/suporka_image_filter/index.html)+[Demo](https://zxpsuper.github.io/Demo/suporka_image_filter/)
+
+---
+
 18. **拼图小游戏**
 
 -   拼图小游戏（将 1-9 按顺序排在中间位置即可）
