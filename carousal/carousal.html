@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>轮播图</title>
+    <style>
+      .music-carousal {
+        height: 250px;
+        position: relative;
+        margin-top: 30px;
+      }
+
+      .banner-list {
+        position: absolute;
+        width: 460px;
+        height: 250px;
+        left: 50%;
+        margin-left: -230px;
+        z-index: 3;
+      }
+
+      .banner-list .banner-item {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        transition: all 0.5s ease;
+      }
+
+      .banner-list .banner-item-out {
+        transform: rotateY(0) translateX(0) translateZ(0) scale(0.7);
+        opacity: 0;
+        z-index: -1;
+      }
+
+      .banner-list .banner-item-current {
+        transform: rotateY(0) translateX(0) translateZ(0);
+        z-index: 5;
+      }
+
+      .banner-list .banner-item-prev {
+        z-index: 3;
+        transform: rotateY(30deg) translate3d(-140px, -15px, -200px) scale(0.7);
+        opacity: 0.7;
+      }
+
+      .banner-list .banner-item-next {
+        z-index: 3;
+        transform: rotateY(-30deg) translate3d(140px, -15px, -200px) scale(0.7);
+        opacity: 0.7;
+      }
+
+      .banner-list .banner-item img {
+        width: 100%;
+        box-shadow: 0 8px 10px 0 rgba(88, 10, 0, 0.2);
+        border-radius: 3px;
+      }
+
+      .pagination-box {
+        position: absolute;
+        bottom: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 5;
+      }
+
+      .pagination-box .pagination-item {
+        width: 8px;
+        height: 8px;
+        background: #e2e2e3;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 0 3px;
+      }
+
+      .pagination-box .pagination-item.active {
+        background: #d71417;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="music-carousal"></div>
+    <script>
+      let currentIndex = 1; // 当前是在第几个
+      let timer;
+
+      const carousal = {
+        init: function(object) {
+          const { el, banners, interval } = object;
+
+          // banner至少为3个
+          const length = banners.length;
+          if (length === 1) {
+            banners.push(banners[0]);
+            banners.push(banners[0]);
+          }
+          if (length === 2) {
+            banners.push(banners[0]);
+          }
+          this._render(el, banners);
+          timer = setInterval(this._next.bind(this), interval);
+          this.listenPaginationTouch.apply(this);
+        },
+
+        _render: function(el, banners) {
+          const imgUl = document.createElement("div");
+          imgUl.className = "banner-list";
+          let imgUlInnerHTML = "";
+
+          const paginationBox = document.createElement("div");
+          paginationBox.className = "pagination-box";
+          let paginationBoxInnerHTML = "";
+
+          banners.forEach((item, index) => {
+            imgUlInnerHTML += `<div class="banner-item ${
+              index === 0 ? "banner-item-prev" : ""
+            } ${index === 1 ? "banner-item-current" : ""} ${
+              index === 2 ? "banner-item-next" : ""
+            } ${index > 2 ? "banner-item-out" : ""}"><img src="${
+              item.imageUrl
+            }"></div>`;
+
+            paginationBoxInnerHTML += `<div class="pagination-item index-${index} ${
+              index === currentIndex ? "active" : ""
+            }"></div>`;
+          });
+          imgUl.innerHTML = imgUlInnerHTML;
+          paginationBox.innerHTML = paginationBoxInnerHTML;
+          el.appendChild(imgUl);
+          el.appendChild(paginationBox);
+        },
+
+        // 右边的那个图片变成当前的大图
+        _next: function() {
+          let bannerList = document.querySelectorAll(".banner-item");
+          let length = bannerList.length;
+          currentIndex = (currentIndex + 1) % length;
+          this._changeNextOrder(currentIndex);
+          this._renderPagination(currentIndex);
+        },
+
+        // 向右交换顺序
+        _changeNextOrder: function(_currentIndex) {
+          let bannerList = document.querySelectorAll(".banner-item");
+          let length = bannerList.length;
+
+          bannerList.forEach((item, index) => {
+            if (index === _currentIndex) {
+              item.className = "banner-item banner-item-current";
+            } else if (index === (_currentIndex - 1 + length) % length) {
+              item.className = "banner-item banner-item-prev";
+            } else if (index === (_currentIndex + 1) % length) {
+              item.className = "banner-item banner-item-next";
+            } else {
+              item.className = "banner-item banner-item-out";
+            }
+          });
+        },
+
+        _renderPagination: function(_currentIndex) {
+          let paginationList = document.querySelectorAll(".pagination-item");
+          paginationList.forEach((item, index) => {
+            if (index === _currentIndex) {
+              item.classList.add("active");
+            } else {
+              item.classList.remove("active");
+            }
+          });
+        },
+
+        // 监听小圆点按钮点击
+        listenPaginationTouch: function() {
+          let paginationBox = document.querySelector(".pagination-box");
+          paginationBox.addEventListener("click", event => {
+            const target = event.target;
+            if (target.classList.contains("pagination-item")) {
+              try {
+                let className = target.classList[1];
+                let index = Number(className.split("-")[1]);
+                this._changeNextOrder(index);
+                this._renderPagination(index);
+                currentIndex = index;
+                clearInterval(timer);
+                timer = setInterval(this._next.bind(this), 5000);
+              } catch (error) {
+                throw new Error(error);
+              }
+            }
+          });
+        }
+      };
+
+      const carousalDom = document.querySelector(".music-carousal");
+      const banners = [
+        {
+          imageUrl:
+            "http://p1.music.126.net/nHJXJZVMsSpi3v1ee8B8XA==/109951163797188493.jpg"
+        },
+        {
+          imageUrl:
+            "http://p1.music.126.net/iCrkUC8x7ViQwLULtgqkqw==/109951163797194143.jpg"
+        },
+        {
+          imageUrl:
+            "http://p1.music.126.net/2Jih8vXjnTeIzxtPU-gQiw==/109951163797164224.jpg"
+        },
+        {
+          imageUrl:
+            "http://p1.music.126.net/c1OhLIjnd9zB8NBUc3Olqg==/109951163797172654.jpg"
+        },
+        {
+          imageUrl:
+            "http://p1.music.126.net/SWjJnQTGa6vhBOzKrkR6wA==/109951163797179161.jpg"
+        },
+        {
+          imageUrl:
+            "http://p1.music.126.net/Wa9ENrBphVjH46A6Kt8yiA==/109951163797159700.jpg"
+        }
+      ];
+      carousal.init({
+        el: carousalDom,
+        banners,
+        interval: 5000
+      });
+    </script>
+  </body>
+</html>
