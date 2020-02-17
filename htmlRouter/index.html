@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>路由</title>
+        <style>
+            .nav-list {
+                list-style: none;
+                line-height: 45px;
+                text-align: center;
+            }
+
+            .nav-list .nav-item {
+                display: inline-block;
+                margin: 0 30px;
+            }
+
+            .nav-list .nav-item:first-child {
+                margin-left: 0;
+            }
+
+            .nav-list .nav-item:last-child {
+                margin-right: 0;
+            }
+
+            .nav-list .nav-item a {
+                text-decoration: none;
+                color: #000;
+                font-size: 14px;
+                cursor: pointer;
+            }
+
+            .nav-list .nav-item.active a {
+                color: #b92500;
+            }
+
+            .nav-list .nav-item a:hover {
+                color: #b92500;
+            }
+
+            .main-content .main-box {
+                text-align: center;
+                height: 200px;
+                width: 200px;
+                line-height: 200px;
+                background-color: aqua;
+                margin: 0 auto 20px;
+            }
+
+            .main-content .main-box-show {
+                display: block;
+            }
+
+            .nav-area {
+                text-align: center;
+            }
+
+            .nav-area-back,
+            .nav-area-front {
+                display: inline-block;
+            }
+
+            .nav-area .active {
+                color: #c52c04;
+                cursor: pointer;
+            }
+            [data-component-name] {
+                display: none;
+            }
+            button {
+                display: inline-block;
+                box-sizing: border-box;
+                height: 44px;
+                margin: 0;
+                padding: 0;
+                font-size: 16px;
+                line-height: 42px;
+                text-align: center;
+                border-radius: 2px;
+                cursor: pointer;
+                -webkit-transition: opacity 0.2s;
+                transition: opacity 0.2s;
+                -webkit-appearance: none;
+                -webkit-text-size-adjust: 100%;
+                color: #fff;
+                background-color: #07c160;
+                border: 1px solid #07c160;
+                padding: 0 15px;
+                font-size: 14px;
+                margin-bottom: 16px;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <div class="nav">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="#/monday">周一</a></li>
+                    <li class="nav-item"><a href="#/tuesday">周二</a></li>
+                    <li class="nav-item"><a href="#/wednesday">周三</a></li>
+                    <li class="nav-item"><a href="#/thursday">周四</a></li>
+                    <li class="nav-item"><a href="#/friday">周五</a></li>
+                </ul>
+            </div>
+            <div class="main-content">
+                <div class="main-box" data-component-name="monday">monday</div>
+                <div class="main-box" data-component-name="tuesday">tuesday</div>
+                <div class="main-box" data-component-name="wednesday">wednesday</div>
+                <div class="main-box" data-component-name="thursday">thursday</div>
+                <div class="main-box" data-component-name="friday">friday</div>
+            </div>
+        </main>
+
+        <div class="nav-area">
+            <button class="nav-area-back" onclick="router.back();">后退</button>
+            <button class="nav-area-front" onclick="router.front();">前进</button>
+            <button class="nav-area-front" onclick="router.go(-1);">go(-1)</button>
+            <button
+                class="nav-area-front"
+                onclick="router.push({path: '/monday', query: {name: 'suporka', age: '26'}});"
+            >
+                push path
+            </button>
+            <button
+                class="nav-area-front"
+                onclick="router.push({name: 'monday', query: {name: 'suporka', age: '20'}});"
+            >
+                push name
+            </button>
+
+            <button
+                class="nav-area-front"
+                onclick="router.replace({name: 'monday', query: {name: 'suporka', age: '18'}});"
+            >
+                replace
+            </button>
+            <script src="./htmlRouter.js"></script>
+            <script>
+                window.router = new htmlRouter({
+                    mode: 'hash',
+                    routes: [
+                        {
+                            path: '/monday',
+                            name: 'monday',
+                        },
+                        {
+                            path: '/tuesday',
+                            name: 'tuesday',
+                        },
+                        {
+                            path: '/wednesday',
+                            name: 'wednesday',
+                        },
+                        {
+                            path: '/thursday',
+                            name: 'thursday',
+                        },
+                        {
+                            path: '/friday',
+                            name: 'friday',
+                        },
+                    ],
+                });
+            </script>
+        </div>
+    </body>
+</html>
