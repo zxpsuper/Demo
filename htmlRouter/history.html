@@ -96,13 +96,16 @@
         <main>
             <div class="nav">
                 <ul class="nav-list">
-                    <li class="nav-item"><a href="#/monday">周一</a></li>
-                    <li class="nav-item"><a href="#/tuesday">周二</a></li>
-                    <li class="nav-item"><a href="#/wednesday">周三</a></li>
-                    <li class="nav-item"><a href="#/thursday">周四</a></li>
-                    <li class="nav-item"><a href="#/friday">周五</a></li>
+                    <li class="nav-item"><a onclick="router.push({name: 'monday'})">周一</a></li>
+                    <li class="nav-item">
+                        <a onclick="router.push({name: 'tuesday', query: {name: 'suporka', age: '26'}})">周二</a>
+                    </li>
+                    <li class="nav-item"><a onclick="router.push({path: '/wednesday'})">周三</a></li>
+                    <li class="nav-item">
+                        <a onclick="router.push({path: '/thursday', query: {name: 'suporka', age: '20'}})">周四</a>
+                    </li>
+                    <li class="nav-item"><a onclick="router.replace({name: 'friday'})">周五</a></li>
                 </ul>
-                
             </div>
             <div class="main-content">
                 <div class="main-box" data-component-name="monday">monday</div>
@@ -136,34 +139,34 @@
             >
                 replace
             </button>
-            <script src="./htmlRouter.js"></script>
-            <script>
-                window.router = new htmlRouter({
-                    mode: 'hash',
-                    routes: [
-                        {
-                            path: '/monday',
-                            name: 'monday',
-                        },
-                        {
-                            path: '/tuesday',
-                            name: 'tuesday',
-                        },
-                        {
-                            path: '/wednesday',
-                            name: 'wednesday',
-                        },
-                        {
-                            path: '/thursday',
-                            name: 'thursday',
-                        },
-                        {
-                            path: '/friday',
-                            name: 'friday',
-                        },
-                    ],
-                });
-            </script>
         </div>
+        <script src="./htmlRouter_all.js"></script>
+        <script>
+            window.router = new htmlRouter({
+                mode: 'hash',
+                routes: [
+                    {
+                        path: '/monday',
+                        name: 'monday',
+                    },
+                    {
+                        path: '/tuesday',
+                        name: 'tuesday',
+                    },
+                    {
+                        path: '/wednesday',
+                        name: 'wednesday',
+                    },
+                    {
+                        path: '/thursday',
+                        name: 'thursday',
+                    },
+                    {
+                        path: '/friday',
+                        name: 'friday',
+                    },
+                ],
+            });
+        </script>
     </body>
 </html>
