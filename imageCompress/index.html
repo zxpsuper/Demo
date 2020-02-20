@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        
         <link rel="stylesheet" type="text/css" href="https://unpkg.com/view-design/dist/styles/iview.css" />
         <link rel="stylesheet" href="./index.css" />
         <script type="text/javascript" src="https://vuejs.org/js/vue.min.js"></script>
@@ -17,15 +18,6 @@
         <div id="app">
             <div class="text-center">
                 <h1 style="margin-bottom: 20px;">图片压缩</h1>
-                <!-- <i-select
-                        v-model="province"
-                        style="width:200px;text-align: left;"
-                        placeholder="请选择省份"
-                    >
-                        <i-option v-for="(item, key, index) in provinceList" :value="key" :key="key"
-                            >{{ item}}</i-option
-                        >
-                </i-select> -->
                 <p style="margin-bottom: 20px">
                     <span>图片质量: </span>
                     <i-select v-model="quality" style="width:200px;text-align: left;" placeholder="请选择图片质量">
@@ -66,7 +58,7 @@
                 el: '#app',
                 data: {
                     file:
-                        'https://user-gold-cdn.xitu.io/2017/11/13/15fb50927c2cceba?imageView2/0/w/1280/h/960/format/webp/ignore-error/1',
+                        'https://dss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1477436123,3577936229&fm=26&gp=0.jpg',
                     width: 500,
                     quality: 1,
                     qualityList: [0.1, 0.5, 1],
@@ -74,15 +66,6 @@
                     mimeTypeList: ['image/jpeg', 'image/png'],
                     instance: null,
                 },
-                computed: {
-                    citys() {
-                        return this.cityList[this.province] || {};
-                    },
-                    countys() {
-                        return this.countyList[this.city] || {};
-                    },
-                },
-                created() {},
                 methods: {
                     downImage() {
                         if (!this.instance) {
@@ -121,22 +104,8 @@
                                 // // 获取压缩后的blob文件，可用于上传
                                 instance.getCompressFile().then(blob => {
                                     
-                                    let formData = new FormData();
-                                    formData.append('file', file);
-
-                                    console.log(file);
-                                    fetch('https://imgkr.com/api/files/upload', {
-                                        method: 'post',
-                                        headers: {
-                                            'Content-Type': 'multipart/form-data',
-                                        },
-                                        body: formData,
-                                    })
-                                        .then(response => response.json())
-                                        .then(data => {
-                                            console.log(data);
-                                        });
                                 });
+
                                 // 下载压缩后文件
                                 // instance.downloadCompressFile();
                             })
@@ -172,26 +141,10 @@
 
                                 // // 获取压缩后的blob文件，可用于上传
                                 instance.getCompressFile().then(blob => {
-                                    console.log('blob', blob);
-                                    let file = new window.File([blob], 'image.jpg', {
-                                        type: that.mimeType,
-                                    });
-                                    let formData = new FormData();
-                                    formData.append('file', file);
-
-                                    console.log(file);
-                                    fetch('https://imgkr.com/api/files/upload', {
-                                        method: 'post',
-                                        headers: {
-                                            'Content-Type': 'multipart/form-data',
-                                        },
-                                        body: formData,
-                                    })
-                                        .then(response => response.json())
-                                        .then(data => {
-                                            console.log(data);
-                                        });
                                 });
+
+                                // 输出base64
+                                console.log(instance.getImageBase64())
                                 // 下载压缩后文件
                                 // instance.downloadCompressFile();
                             })

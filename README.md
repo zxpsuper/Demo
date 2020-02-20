@@ -54,6 +54,7 @@
 | 20. 简单轮播图 | -- | [demo](https://zxpsuper.github.io/Demo/carousal/carousal.html)| [源码](https://github.com/zxpsuper/Demo/blob/master/carousal/carousal.html) |
 | 21. hash路由 | [简易路由实现——（hash路由）](https://juejin.im/post/5e4a875c6fb9a07c846b685e) | [demo](https://zxpsuper.github.io/Demo/htmlRouter/#/monday)| [源码](https://github.com/zxpsuper/Demo/tree/master/htmlRouter) |
 | 22. history路由 | [简易路由实现——（hash路由）](https://juejin.im/post/5e4a875c6fb9a07c846b685e) | [demo](https://zxpsuper.github.io/Demo/htmlRouter/history.html)| [源码](https://github.com/zxpsuper/Demo/tree/master/htmlRouter) |
+| 22. 图片压缩 | [Canvas 进阶（六）实现图片压缩功能](https://juejin.im/post/5e4e75c8518825493c7b52a3) | [demo](https://zxpsuper.github.io/Demo/imageCompress/)| [源码](https://github.com/zxpsuper/Demo/tree/master/imageCompress/imageCompress-dev.js) |
 
 ## 关于作者 :boy:
 
