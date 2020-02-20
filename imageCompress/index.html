@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/view-design/dist/styles/iview.css" />
+        <link rel="stylesheet" href="./index.css" />
+        <script type="text/javascript" src="https://vuejs.org/js/vue.min.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/view-design/dist/iview.min.js"></script>
+        <title>图片压缩</title>
+    </head>
+    <body>
+        <a class="github-fork-ribbon right-top" href="https://github.com/zxpsuper/Demo" title="Fork me on GitHub"
+            >Fork me on GitHub</a
+        >
+        <div id="app">
+            <div class="text-center">
+                <h1 style="margin-bottom: 20px;">图片压缩</h1>
+                <!-- <i-select
+                        v-model="province"
+                        style="width:200px;text-align: left;"
+                        placeholder="请选择省份"
+                    >
+                        <i-option v-for="(item, key, index) in provinceList" :value="key" :key="key"
+                            >{{ item}}</i-option
+                        >
+                </i-select> -->
+                <p style="margin-bottom: 20px">
+                    <span>图片质量: </span>
+                    <i-select v-model="quality" style="width:200px;text-align: left;" placeholder="请选择图片质量">
+                        <i-option v-for="(item, key, index) in qualityList" :value="key" :key="key"
+                            >{{ item }}</i-option
+                        >
+                    </i-select>
+                </p>
+                <p style="margin-bottom: 20px">
+                    <span>图片格式: </span>
+                    <i-select v-model="mimeType" style="width:200px;text-align: left;" placeholder="请选择图片格式">
+                        <i-option v-for="item in mimeTypeList" :value="item" :key="item">{{ item }}</i-option>
+                    </i-select>
+                </p>
+                <p style="margin-bottom: 20px">
+                    <span>图片宽度: </span>
+                    <i-input v-model="width" style="width:200px;text-align: left;" number> </i-input>
+                </p>
+                <p style="margin-bottom: 20px">
+                    <span>图片路径: </span>
+                    <i-input v-model="file" style="width:200px;text-align: left;"> </i-input>
+                </p>
+                <div>
+                    <i-button icon="ios-cloud-upload-outline" type="primary" @click="$refs.input.click()"
+                        >上传图片</i-button
+                    >
+                    <i-button type="primary" @click="createImage">路径生成图片</i-button>
+                    <i-button type="primary" @click="downImage">下载图片</i-button>
+                </div>
+                <input type="file" ref="input" @change="uploadImage" style="display: none;" />
+                <img src="" alt="" id="img" style="width: 350px;" />
+                <canvas id="canvas" class="suporka" style="width: 350px;"></canvas>
+            </div>
+        </div>
+        <script src="./imageCompress.js"></script>
+        <script>
+            new Vue({
+                el: '#app',
+                data: {
+                    file:
+                        'https://user-gold-cdn.xitu.io/2017/11/13/15fb50927c2cceba?imageView2/0/w/1280/h/960/format/webp/ignore-error/1',
+                    width: 500,
+                    quality: 1,
+                    qualityList: [0.1, 0.5, 1],
+                    mimeType: 'image/jpeg',
+                    mimeTypeList: ['image/jpeg', 'image/png'],
+                    instance: null,
+                },
+                computed: {
+                    citys() {
+                        return this.cityList[this.province] || {};
+                    },
+                    countys() {
+                        return this.countyList[this.city] || {};
+                    },
+                },
+                created() {},
+                methods: {
+                    downImage() {
+                        if (!this.instance) {
+                            alert('请先生成图片');
+                            return;
+                        }
+                        this.instance.downloadCompressFile();
+                    },
+                    // 上传图片
+                    uploadImage(e) {
+                        var that = this;
+                        var file = e.target.files[0];
+                        new imageCompress({
+                            file,
+                            width: that.width,
+                            quality: that.quality,
+                            mimeType: that.mimeType,
+                        })
+                            .then(instance => {
+                                // 获取canvas，可用于自行加工绘制
+                                let canvas = instance.getCanvas();
+                                let context = canvas.getContext('2d');
+                                context.fillStyle = 'red';
+                                context.font = 'bold 35px Arial';
+                                context.fillText('小皮咖图片压缩', 150, 150);
+
+                                // 替换文档中存在图片节点
+                                instance.replaceImageNode(document.getElementById('img'));
+                                // 替换文档中存在的canvas节点
+                                instance.replaceCanvasNode(document.getElementById('canvas'));
+                                // 获取压缩后生成的image节点
+                                instance.getCompressImageNode().then(image => {
+                                    console.log(image);
+                                });
+
+                                // // 获取压缩后的blob文件，可用于上传
+                                instance.getCompressFile().then(blob => {
+                                    console.log('blob', blob);
+                                    let file = new window.File([blob], 'image.jpg', {
+                                        type: that.mimeType,
+                                    });
+                                    let formData = new FormData();
+                                    formData.append('file', file);
+
+                                    console.log(file);
+                                    fetch('https://imgkr.com/api/files/upload', {
+                                        method: 'post',
+                                        headers: {
+                                            'Content-Type': 'multipart/form-data',
+                                        },
+                                        body: formData,
+                                    })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            console.log(data);
+                                        });
+                                });
+                                // 下载压缩后文件
+                                // instance.downloadCompressFile();
+                            })
+                            .catch(err => {
+                                console.log(err);
+                            });
+                    },
+                    createImage() {
+                        let that = this;
+                        new imageCompress({
+                            file: that.file,
+                            width: that.width,
+                            quality: that.quality,
+                            mimeType: that.mimeType,
+                        })
+                            .then(instance => {
+                                that.instance = instance;
+                                // 获取canvas，可用于自行加工绘制
+                                let canvas = instance.getCanvas();
+                                let context = canvas.getContext('2d');
+                                context.fillStyle = '#ccc';
+                                context.font = 'bold 35px Arial';
+                                context.fillText('小皮咖图片压缩', 150, 150);
+
+                                // 替换文档中存在图片节点
+                                instance.replaceImageNode(document.getElementById('img'));
+                                // 替换文档中存在的canvas节点
+                                instance.replaceCanvasNode(document.getElementById('canvas'));
+                                // 获取压缩后生成的image节点
+                                instance.getCompressImageNode().then(image => {
+                                    console.log(image);
+                                });
+
+                                // // 获取压缩后的blob文件，可用于上传
+                                instance.getCompressFile().then(blob => {
+                                    
+                                });
+                                // 下载压缩后文件
+                                // instance.downloadCompressFile();
+                            })
+                            .catch(err => {
+                                console.log(err);
+                            });
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>
