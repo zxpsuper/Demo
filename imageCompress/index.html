@@ -105,7 +105,7 @@
                                 // 获取canvas，可用于自行加工绘制
                                 let canvas = instance.getCanvas();
                                 let context = canvas.getContext('2d');
-                                context.fillStyle = 'red';
+                                context.fillStyle = '#ccc';
                                 context.font = 'bold 35px Arial';
                                 context.fillText('小皮咖图片压缩', 150, 150);
 
@@ -120,10 +120,7 @@
 
                                 // // 获取压缩后的blob文件，可用于上传
                                 instance.getCompressFile().then(blob => {
-                                    console.log('blob', blob);
-                                    let file = new window.File([blob], 'image.jpg', {
-                                        type: that.mimeType,
-                                    });
+                                    
                                     let formData = new FormData();
                                     formData.append('file', file);
 
@@ -175,7 +172,25 @@
 
                                 // // 获取压缩后的blob文件，可用于上传
                                 instance.getCompressFile().then(blob => {
-                                    
+                                    console.log('blob', blob);
+                                    let file = new window.File([blob], 'image.jpg', {
+                                        type: that.mimeType,
+                                    });
+                                    let formData = new FormData();
+                                    formData.append('file', file);
+
+                                    console.log(file);
+                                    fetch('https://imgkr.com/api/files/upload', {
+                                        method: 'post',
+                                        headers: {
+                                            'Content-Type': 'multipart/form-data',
+                                        },
+                                        body: formData,
+                                    })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            console.log(data);
+                                        });
                                 });
                                 // 下载压缩后文件
                                 // instance.downloadCompressFile();
