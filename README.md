@@ -35,9 +35,9 @@
 | 4. 图片懒加载 | [懒加载](https://blog.csdn.net/weixin_38788347/article/details/78217372) | [demo](https://zxpsuper.github.io/Demo/lazyload.html) | [源码](./lazyload.html) |
 | 5. websocket | [使用 socket.io.js 实现 websocket 实时通讯](https://blog.csdn.net/weixin_38788347/article/details/79726992) | -- | [源码](./websocket/) |
 | 6. 瀑布流的实现 | [瀑布流布局的实现](https://blog.csdn.net/weixin_38788347/article/details/78390064) | -- | -- |
-| -- | --| [CSS 实现瀑布流](https://zxpsuper.github.io/Demo/waterflow/waterfallcss.html) | [源码](./waterflow/waterfallcss.html) |
-| -- | -- | [JAVASCRIPT 实现瀑布流](https://zxpsuper.github.io/Demo/waterflow/waterfalljs.html) | [源码](./waterflow/waterfalljs.html) |
-| -- | -- | [JQUERY 实现瀑布流](https://zxpsuper.github.io/Demo/waterflow/waterfalljq.html) | [源码](./waterflow/waterfalljq.html) |
+| -- | CSS 实现瀑布流| [demo](https://zxpsuper.github.io/Demo/waterflow/waterfallcss.html) | [源码](./waterflow/waterfallcss.html) |
+| -- | JAVASCRIPT 实现瀑布流 | [demo](https://zxpsuper.github.io/Demo/waterflow/waterfalljs.html) | [源码](./waterflow/waterfalljs.html) |
+| -- | JQUERY 实现瀑布流 | [demo](https://zxpsuper.github.io/Demo/waterflow/waterfalljq.html) | [源码](./waterflow/waterfalljq.html) |
 | 7. CANVAS 刮奖小 Demo | [canvas 实现刮刮乐](https://blog.csdn.net/weixin_38788347/article/details/78239704) | [demo](https://zxpsuper.github.io/Demo/guajiang/index.html)| [源码](./guajiang/index.html) |
 | 8. VUE 时间选择器 | [vue 手写一个时间选择器](https://juejin.im/post/5b62b0cfe51d453489494efb) | [demo](https://zxpsuper.github.io/Demo/datepicker/index.html)| [源码](./datepicker/Datepicker.vue) |
 | 9. ES6 手写一个“辨色”小游戏 | [ES6 手写一个“辨色”小游戏](https://segmentfault.com/a/1190000016444812) | [demo](https://zxpsuper.github.io/Demo/color/index.html)| [源码](./color/index.js) |
