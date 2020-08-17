@@ -80,14 +80,14 @@
                         });
                         return;
                     }
-                    let total = +this.currentMoney * (100 + (+this.rate)) * (+this.year) / 100
+                    let total = +this.currentMoney * (((100 + (+this.rate)) / 100) ** (+this.year))
                     let monthTotal = +this.year * 12, monthInterest = +this.monthMoney * +this.rate / 1200
                     for (let i = 0; i < monthTotal; i++) {
                         total += +this.monthMoney +  monthInterest * (monthTotal - i)
                     }
                     this.$Modal.success({
                         title: '到期总资产',
-                        content: '预计您到时总资产为' + total,
+                        content: '预计您到时总资产为' + (total | 0),
                     });
                 },
                 computeYear() {
@@ -100,7 +100,7 @@
                     }
                     let total = 0, year = 0, month = 0
                     while(total < +this.totalMoney) {
-                        total = +this.currentMoney * (100 + (+this.rate)) * (year + 1) / 100
+                        total = +this.currentMoney * (((100 + (+this.rate)) / 100 ) ** (year + 1)) 
                         let monthTotal = (year + 1) * 12, monthInterest = +this.monthMoney * +this.rate / 1200
                         for (let i = 0; i < monthTotal; i++) {
                             total += +this.monthMoney +  monthInterest * (monthTotal - i)
@@ -109,15 +109,12 @@
                                 break
                             }
                         }
-                        if (month === 12) {
-                            year++
-                            month = 0
-                        }
                         year++
                     }
+                    let content = month % 12 === 0 ?  (month / 12 | 0) + '年整' : (month / 12 | 0) + '年又' + (month % 12) + '月' 
                     this.$Modal.success({
                         title: '预计所需投资年限',
-                        content: year - 1 + '年又' + month + '月',
+                        content
                     });
                 },
                 computeRate() {
@@ -130,12 +127,14 @@
                     }
                     let total = 0, rate = 1
                     while(total < +this.totalMoney) {
-                        total = +this.currentMoney * (100 + rate) * +this.year / 100
+                        total = 0
+                        total = +this.currentMoney * (((100 + rate) / 100 ) ** (+this.year))
                         let monthTotal = +this.year * 12, monthInterest = +this.monthMoney * rate / 1200
                         for (let i = 0; i < monthTotal; i++) {
                             total += +this.monthMoney +  monthInterest * (monthTotal - i)
                         }
-                        rate++
+                        console.log(total,rate)
+                        rate= rate + 1
                     }
                     this.$Modal.success({
                         title: '预计所需年化率',
