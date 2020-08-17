@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/view-design/dist/styles/iview.css" />
+    <!-- <link rel="stylesheet" href="./index.css" /> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script type="text/javascript" src="https://unpkg.com/view-design/dist/iview.min.js"></script>
+    <title>投资计算器</title>
+    <style>
+        #app {
+            width: 400px;
+            margin: 40px auto;
+        }
+        .mb-10 {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="text-center">
+            <div>
+                <h2 class="mb-10">投资计算器</h2>
+                <i-select v-model="computedMode" style="width:200px" placeholder="请选择计算模式" class="mb-10">
+                    <i-option v-for="item in selectList" :value="item.value" :key="item.value">{{ item.label }}
+                    </i-option>
+                </i-select>
+                <i-input v-model="currentMoney" placeholder="请输入当前投资总资产" style="width: 200px" class="mb-10" key="currentMoney"></i-input>
+                <i-input v-model="monthMoney" placeholder="请输入每月可投资金额" style="width: 200px" class="mb-10" key="monthMoney"></i-input>
+                <i-input v-model="year" placeholder="请输入投资年限(整数)" style="width: 200px" class="mb-10" v-if="computedMode !== '1'" key="year"></i-input>
+                <i-input v-model="totalMoney" placeholder="请输入预期总资产" style="width: 200px" class="mb-10" v-if="computedMode !== '0'" key="totalMoney"></i-input>
+                <i-input v-model="rate" placeholder="请输入预期年化收益率%" style="width: 200px" class="mb-10" v-if="computedMode !== '2'" key="rate"></i-input>
+                <div>
+                    <i-button icon="md-calculator" type="primary" @click="compute()" style="width: 200px">计算一下</i-button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                computedMode: '2',
+                selectList: [
+                    {
+                        label: '计算总资产',
+                        value: '0',
+                    },
+                    {
+                        label: '计算所需年限',
+                        value: '1',
+                    },
+                    {
+                        label: '计算所需年化率',
+                        value: '2',
+                    },
+                ],
+                currentMoney: '',
+                monthMoney: '',
+                year: '',
+                totalMoney: '',
+                rate: ''
+            },
+            methods: {
+                compute() {
+                    if (this.computedMode === '0') this.computeTotalMoney()
+                    else if (this.computedMode === '1') this.computeYear()
+                    else this.computeRate()
+                },
+                computeTotalMoney() {
+                    if (/\D/.test(this.currentMoney) || /\D/.test(this.monthMoney) || /\D/.test(this.year) || /\D/.test(this.rate)) {
+                        this.$Modal.error({
+                            title: '错误',
+                            content: '请输入正确的数字啦!!',
+                        });
+                        return;
+                    }
+                    let total = +this.currentMoney * (100 + (+this.rate)) * (+this.year) / 100
+                    let monthTotal = +this.year * 12, monthInterest = +this.monthMoney * +this.rate / 1200
+                    for (let i = 0; i < monthTotal; i++) {
+                        total += +this.monthMoney +  monthInterest * (monthTotal - i)
+                    }
+                    this.$Modal.success({
+                        title: '到期总资产',
+                        content: '预计您到时总资产为' + total,
+                    });
+                },
+                computeYear() {
+                    if (/\D/.test(this.currentMoney) || /\D/.test(this.monthMoney) || /\D/.test(this.totalMoney) || /\D/.test(this.rate)) {
+                        this.$Modal.error({
+                            title: '错误',
+                            content: '请输入正确的数字啦!!',
+                        });
+                        return;
+                    }
+                    let total = 0, year = 0, month = 0
+                    while(total < +this.totalMoney) {
+                        total = +this.currentMoney * (100 + (+this.rate)) * (year + 1) / 100
+                        let monthTotal = (year + 1) * 12, monthInterest = +this.monthMoney * +this.rate / 1200
+                        for (let i = 0; i < monthTotal; i++) {
+                            total += +this.monthMoney +  monthInterest * (monthTotal - i)
+                            if (total >= +this.totalMoney) {
+                                month = i + 1
+                                break
+                            }
+                        }
+                        if (month === 12) {
+                            year++
+                            month = 0
+                        }
+                        year++
+                    }
+                    this.$Modal.success({
+                        title: '预计所需投资年限',
+                        content: year - 1 + '年又' + month + '月',
+                    });
+                },
+                computeRate() {
+                    if (/\D/.test(this.currentMoney) || /\D/.test(this.monthMoney) || /\D/.test(this.totalMoney) || /\D/.test(this.year)) {
+                        this.$Modal.error({
+                            title: '错误',
+                            content: '请输入正确的数字啦!!',
+                        });
+                        return;
+                    }
+                    let total = 0, rate = 1
+                    while(total < +this.totalMoney) {
+                        total = +this.currentMoney * (100 + rate) * +this.year / 100
+                        let monthTotal = +this.year * 12, monthInterest = +this.monthMoney * rate / 1200
+                        for (let i = 0; i < monthTotal; i++) {
+                            total += +this.monthMoney +  monthInterest * (monthTotal - i)
+                        }
+                        rate++
+                    }
+                    this.$Modal.success({
+                        title: '预计所需年化率',
+                        content: rate - 1 + "%",
+                    });
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>
