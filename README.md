@@ -7,10 +7,9 @@
 -   在这里记录着自己写文章，做项目存放的一些 demo 和 源码。
 
 -   欢迎大家到 Issues 交流，鼓励 PR，感谢 Star、感谢 watch，大家有啥好的建议可以加我微信一起交流讨论！
--   熬夜不易，如果您觉得我的文章或者 demo 有用，可以赏我杯咖啡(^\_−)☆
-
+-   **欢迎添加微信拉你进前端交流分享群，资源共享一同成长！**
 <div>
-  <img src="./images/wechat.png" style="width: 320px; margin: 0 auto; display: block">
+  <img src="./images/suporka.jpg" style="width: 320px; margin: 0 auto; display: block">
 </div>
 
 **备注：**
